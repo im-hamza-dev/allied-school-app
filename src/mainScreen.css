@@ -1,0 +1,59 @@
+body{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'poppins';
+}
+
+.fullScreen{
+    height: 100vh;
+
+}
+
+.left{
+    width: 100%;
+    height: 10vh;
+    background: url(./leftPortion.png) no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+
+}
+
+.extra{
+    width: 83%;
+    color: white;
+    font-size: 23px;
+    padding-left: 40px;
+}
+
+.admin{
+    width: 73px;
+    float: left;
+    margin: 0px;
+}
+.user{
+    color: white;
+    font-size: 15px;
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    
+}
+
+
+.right{
+    width:100%;
+    height: 90vh;
+    
+}
+.randomImg{
+    margin: 30px;
+}
+
+.options{
+    color: white;
+    padding: 10px;
+
+}
+
+
