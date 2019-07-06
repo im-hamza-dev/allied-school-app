@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import './dataTable';
 import MaterialTableDemo from './dataTable';
 import './scrollTabs.css';
+import DataTable from './dataTable02';
 
 function TabContainer(props) {
   return (
@@ -29,14 +30,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ScrollableTabsButtonAuto() {
+export default function ScrollableTabsButtonAuto(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   function handleChange(event, newValue) {
     setValue(newValue);
   }
-
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
@@ -62,7 +62,7 @@ export default function ScrollableTabsButtonAuto() {
           <Tab label="Dec" />
         </Tabs>
       </AppBar>
-      {value === 0 && <TabContainer className='containerStyle'><MaterialTableDemo/></TabContainer>}
+      {value === 0 && <TabContainer className='containerStyle'><DataTable trigger02 = {props.trigger}/></TabContainer>}
       {value === 1 && <TabContainer><MaterialTableDemo/></TabContainer>}
       {value === 2 && <TabContainer><MaterialTableDemo/></TabContainer>}
       {value === 3 && <TabContainer><MaterialTableDemo/></TabContainer>}
