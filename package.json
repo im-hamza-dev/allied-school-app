@@ -13,8 +13,10 @@
     "material-ui": "^1.0.0-beta.47",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-month-year-picker": "^1.0.1",
     "react-scripts": "3.0.1",
-    "react-tap-event-plugin": "^3.0.3"
+    "react-tap-event-plugin": "^3.0.3",
+    "react-year-month-picker": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

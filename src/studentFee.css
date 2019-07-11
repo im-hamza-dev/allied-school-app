@@ -1,3 +1,10 @@
+.menuRow{
+    margin-bottom: 23px;
+    font-weight: bold;
+    font-family: 'poppins';
+    color: rgb(153, 148, 153);
+
+}
 .StudentFee{
     width:100%;
     height: 150vh;
@@ -6,11 +13,13 @@
 .table{
     width: 80%;
     float: left;
+    padding-bottom: 50px;
+    padding-right: 0px;
 }
 .rightSide{
-    /* height: 66vh; */
+    height: 66vh;
     width: 20%;
-    padding-top: 70px;
+    margin-top: 0px !important;
     float:left;
 
 }
@@ -18,6 +27,7 @@
 .card{
     background-color: white;
     margin-left: 5px;
+    margin-top: 0px !important;
     border-radius: 6px;
     box-shadow: 0px 0px 20px lightgray;
     padding: 20px;
@@ -28,7 +38,9 @@
 
 .padLeft{
     padding-left: 95px;
-    padding-top: 0px;
+    margin-bottom: 10px;
+    margin-top: 0px !important;
+
 }
 .stats{
     padding-top: 20px;
@@ -112,4 +124,15 @@ h5{
 }
 .extraCard{
     padding-bottom: 40px;
+}
+.monthMenu{
+    padding: 10px;
+    font-weight: bold;
+    font-family: 'poppins';
+    color: #EB9FFA;
+    background-color: white;
+    box-shadow: 0px 0px 10px lightgray;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
 }

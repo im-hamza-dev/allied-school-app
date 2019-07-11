@@ -15,7 +15,7 @@ class DataTable extends React.Component {
   constructor(props){
     super(props);
     this.state={
-        studentData: []
+
     }
 }
 
@@ -43,52 +43,26 @@ class DataTable extends React.Component {
   //     },
   //   ],
   // });
-  componentDidUpdate(){
-    // const {trigger02} = this.props;
-    if (this.props.trigger02 === true){
 
-      const axios = require('axios');
-      axios.get("/api/student")
-      .then(response =>
-        response.data.students.map(user=>({
-            id: `${user.studentId}`,
-            name: `${user.studentName}`,
-        }))
-        
-    )
+     
 
-    .then(studentData => {
-        this.setState({
-            studentData
-        });
-    })
-
-    console.log("props recieved");
-
-    }
-  }
+  
   componentDidMount(){
 
-    const axios = require('axios');
-    axios.get("/api/student")
-    .then(response =>
-        response.data.students.map(user=>({
-            id: `${user.studentId}`,
-            name: `${user.studentName}`,
-        }))
-        
-    )
-
-    .then(studentData => {
-        this.setState({
-            studentData
-        });
-    })
+    this.props.trigger01();
     
+  //   const axios2 = require('axios');
+  //   axios2.get("/api/fee")
+  //   .then(response => {
+  //    console.log(response);
+  // })
+
+
   
   }
 render(){
-    const {studentData} = this.state;
+    const {trigger03} = this.props;
+    console.log(this.props.monthProp);
   return (
     //   <div>
     //       {studentData.map(user=>{
@@ -118,7 +92,7 @@ render(){
           </TableRow>
         </TableHead>
         <TableBody>
-          {studentData.map(user => {
+          {trigger03.map(user => {
               const {id,name} = user;
               return(
                 <TableRow key={id}>
