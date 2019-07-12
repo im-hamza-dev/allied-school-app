@@ -53,19 +53,13 @@ class StudentFee extends Component{
     getStudentFunction = () => {
         const axios = require('axios');
         axios.get("/api/student")
-        .then(response =>
-          response.data.students.map(user=>({
+        .then(response =>{
+            const studentData = response.data.students.map(user=>({
               id: `${user.studentId}`,
               name: `${user.studentName}`,
           }))
-          
-      )
-  
-      .then(studentData => {
-          this.setState({
-              studentData
-          });
-      })
+          this.setState({studentData});
+        })
   
     }
 
@@ -100,18 +94,18 @@ class StudentFee extends Component{
             });
        
         
-        this.setState({triggerRequest:true});
+        // this.setState({triggerRequest:true});
 
     }
-    setStateTrigger = (val) => {
-        this.setState({triggerRequest:val});
-    }
+    // setStateTrigger = (val) => {
+    //     this.setState({triggerRequest:val});
+    // }
 
 
     render(){ 
 
 
-        const {studentId, studentName, fatherName, grade, contact,triggerRequest,month, studentData} = this.state;
+        const {studentId, studentName, fatherName, grade, contact, month, studentData} = this.state;
 
 
         return(
@@ -135,7 +129,7 @@ class StudentFee extends Component{
                     </label>
                 </div>
                 <div className = 'top'>
-                    <div className = 'table'><DataTable trigger01 = {this.getStudentFunction} trigger03 = {studentData} monthProp = {month}/></div>
+                    <div className = 'table'><DataTable trigger01 = {this.getStudentFunction} trigger03 = {studentData}/></div>
                     <div className = 'rightSide'>
                         <div className = 'card extraCard'>
                             <div className = 'heading'>Statistics per month:</div>

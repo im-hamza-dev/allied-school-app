@@ -47,22 +47,17 @@ class DataTable extends React.Component {
      
 
   
-  componentDidMount(){
-
-    this.props.trigger01();
-    
+  componentDidMount = () => {
+      this.props.trigger01();   
   //   const axios2 = require('axios');
   //   axios2.get("/api/fee")
   //   .then(response => {
   //    console.log(response);
-  // })
-
-
-  
+  // }) 
   }
 render(){
     const {trigger03} = this.props;
-    console.log(this.props.monthProp);
+    // console.log(this.props.monthProp);
   return (
     //   <div>
     //       {studentData.map(user=>{
@@ -91,7 +86,7 @@ render(){
 
           </TableRow>
         </TableHead>
-        <TableBody>
+        {trigger03 && <TableBody>
           {trigger03.map(user => {
               const {id,name} = user;
               return(
@@ -108,7 +103,7 @@ render(){
                 </TableRow>
               );
             })}
-        </TableBody>
+        </TableBody>}
       </Table>
     </Paper>
   );
