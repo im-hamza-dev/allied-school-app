@@ -76,7 +76,7 @@ class SubmitFee extends Component{
 
                             <br/>
                             
-                            <h5>transport Fee:</h5>
+                            <h5>Transport Fee:</h5>
                             <input class = 'input' type = 'text' name = 'transportFee' value = {transportFee} onChange = {this.onChangeSubmitFee}/>
 
                             <br/>
@@ -87,7 +87,20 @@ class SubmitFee extends Component{
                             <br/>
 
                             <h5>Month:</h5>
-                            <input class = 'input' type = 'text' name = 'month' value = {month} onChange = {this.onChangeSubmitFee}/>
+                            <select className = "input" name = "month" value = {month} onChange={this.onChangeSubmitFee}>
+                            <option value = "Jan">Jan</option>
+                            <option value = "Feb">Feb</option>
+                            <option value = "Mar">Mar</option>
+                            <option value = "Apr">Apr</option>
+                            <option value = "May">May</option>
+                            <option value = "June">June</option>
+                            <option value = "July">July</option>
+                            <option value = "Aug">Aug</option>
+                            <option value = "Sept">Sept</option>
+                            <option value = "Oct">Oct</option>
+                            <option value = "Nov">Nov</option>
+                            <option value = "Dec">Dec</option>
+                            </select>
                             <br/>
 
                             <h5>Year:</h5>

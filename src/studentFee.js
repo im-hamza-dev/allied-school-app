@@ -47,6 +47,7 @@ class StudentFee extends Component{
         data:[],
         triggerRequest:false,
         selectedMonth:'June',
+        selectedYear: 2019,
         studentData:[],
         filteredFeesArray:{},
         totalTransportFee:0,
@@ -69,7 +70,7 @@ class StudentFee extends Component{
                             {
                                 // console.log(this.state.selectedMonth);
                                 // console.log(fee.month);
-                            return fee.month === this.state.selectedMonth;
+                            return (fee.month === this.state.selectedMonth)&&(fee.year === this.state.selectedYear);
                             });
                             if(filteredFees[0]){
                                 this.setState({filteredFeesArray:filteredFees[0]})
@@ -114,12 +115,19 @@ class StudentFee extends Component{
         this.setState({totalFee:0});
         this.getStudentFunction();
     }
+    handleChangeYear = (e)=>{
+        this.setState({[e.target.name]:parseInt(e.target.value)});
+        this.setState({totalTransportFee:0});
+        this.setState({totalTuitionFee:0});
+        this.setState({totalFee:0});
+        this.getStudentFunction();
+    }
     
    
     render(){ 
 
 
-        const {studentId, studentName, fatherName, grade, contact, selectedMonth, studentData} = this.state;
+        const {studentId, studentName, fatherName, grade, contact, selectedMonth, selectedYear, studentData} = this.state;
 
         return(
             <div className = 'StudentFee'>
@@ -162,19 +170,19 @@ class StudentFee extends Component{
                         </select>
                     </label>
                     <label className=  "align-style-select-row label-font">Year: 
-                        <select className = "monthMenu" name = "selectedMonth" value = {selectedMonth} onChange={this.handleChangeMonth}>
-                            <option value = "Jan">Jan</option>
-                            <option value = "Feb">Feb</option>
-                            <option value = "Mar">Mar</option>
-                            <option value = "Apr">Apr</option>
-                            <option value = "May">May</option>
-                            <option value = "June">June</option>
-                            <option value = "July">July</option>
-                            <option value = "Aug">Aug</option>
-                            <option value = "Sept">Sept</option>
-                            <option value = "Oct">Oct</option>
-                            <option value = "Nov">Nov</option>
-                            <option value = "Dec">Dec</option>
+                        <select className = "monthMenu" name = "selectedYear" value = {selectedYear} onChange={this.handleChangeYear}>
+                            <option value = "2019">2019</option>
+                            <option value = "2020">2020</option>
+                            <option value = "2021">2021</option>
+                            <option value = "2022">2022</option>
+                            <option value = "2023">2023</option>
+                            <option value = "2024">2024</option>
+                            <option value = "2025">2025</option>
+                            <option value = "2026">2026</option>
+                            <option value = "2027">2027</option>
+                            <option value = "2028">2028</option>
+                            <option value = "2029">2029</option>
+                            <option value = "2030">2030</option>
                         </select>
                     </label>
                 </div>
