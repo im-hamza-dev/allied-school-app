@@ -17,7 +17,7 @@ class TotalIncome extends Component{
         return(
             <div>
                 <div className = 'top'>
-                    <div className = 'table'><ScrollableTabsButtonAuto/></div>
+                    {/* <div className = 'table'><ScrollableTabsButtonAuto/></div> */}
                     <div className = 'rightSide'>
                         <div className = 'card padLeft'>
                             <div><ControlledOpenSelect/></div>

@@ -12,11 +12,12 @@ import StudentFee from './studentFee';
 import StaffPayment from './staffPayment';
 import OtherExpense from './otherExpense';
 import TotalIncome from './totalIncome';
+import './tabs.css'
 
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography component="div" style={{ padding: 0 * 0 }}>
       {props.children}
     </Typography>
   );
@@ -29,11 +30,12 @@ TabContainer.propTypes = {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
 }));
 
-export default function SimpleTabs() {
+export default function SimpleTabs(){
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -43,7 +45,8 @@ export default function SimpleTabs() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static"
+      className='app-bar-styling'>
         <Tabs value={value} onChange={handleChange}>
           <Tab label="Student Fee" />
           <Tab label="Staff Payments" />

@@ -47,7 +47,7 @@ class DataTable extends React.Component {
      
 
   
-  componentDidMount = () => {
+  componentDidMount = ()=>{
       this.props.trigger01();   
   //   const axios2 = require('axios');
   //   axios2.get("/api/fee")
@@ -88,13 +88,18 @@ render(){
         </TableHead>
         {trigger03 && <TableBody>
           {trigger03.map(user => {
-              const {id,name} = user;
+              const {id,name,fatherName,grade,contact,transportFee,tuitionFee} = user;
               return(
                 <TableRow key={id}>
                 <TableCell component="th" scope="row">
                     {id}
                 </TableCell>
                 <TableCell >{name}</TableCell>
+                <TableCell>{fatherName}</TableCell>
+                <TableCell>{grade}</TableCell>
+                <TableCell>{contact}</TableCell>
+                <TableCell>{transportFee}</TableCell>
+                <TableCell>{tuitionFee}</TableCell>
                 {/* <TableCell align="right">{studentData.fatherName}</TableCell>
                 <TableCell align="right">{studentData.grade}</TableCell>
                 <TableCell align="right">{studentData.section}</TableCell>

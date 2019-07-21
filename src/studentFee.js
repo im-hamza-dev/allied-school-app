@@ -15,6 +15,8 @@ import DataTable from './dataTable02';
 import './datePicker';
 import DatePicker from './datePicker';
 import AddStudent from './addStudent';
+import UpdateStudent from './updateStudent';
+import SubmitFee from './submitFee';
 
   
 const MyButton = styled(Button)({
@@ -44,76 +46,124 @@ class StudentFee extends Component{
         grade:'',
         data:[],
         triggerRequest:false,
-        month:"",
-        studentData:[]
+        selectedMonth:'June',
+        studentData:[],
+        filteredFeesArray:{},
+        totalTransportFee:0,
+        totalTuitionFee:0,
+        totalFee:0,
         }
     }
     
 
-    getStudentFunction = () => {
+    getStudentFunction = ()=>
+    {
         const axios = require('axios');
         axios.get("/api/student")
-        .then(response =>{
-            const studentData = response.data.students.map(user=>({
-              id: `${user.studentId}`,
-              name: `${user.studentName}`,
-          }))
-          this.setState({studentData});
-        })
+        .then(response =>
+            {
+                const studentData = response.data.students.map(user=>
+                    {
+                        console.log(user.fees);
+                        const filteredFees = user.fees.filter(fee =>
+                            {
+                                // console.log(this.state.selectedMonth);
+                                // console.log(fee.month);
+                            return fee.month === this.state.selectedMonth;
+                            });
+                            if(filteredFees[0]){
+                                this.setState({filteredFeesArray:filteredFees[0]})
+                                this.setState({totalTransportFee: this.state.totalTransportFee+filteredFees[0].transportFee});
+                                this.setState({totalTuitionFee: this.state.totalTuitionFee+filteredFees[0].tuitionFee});
+                                this.setState({totalFee:this.state.totalFee+filteredFees[0].transportFee+filteredFees[0].tuitionFee});
+                            }
+                            else{
+                                this.setState({filteredFeesArray:{transportFee: 0, tuitionFee: 0}})
+                            }
+                            console.log(this.state.totalTransportFee);
+                            console.log(this.state.filteredFeesArray);
+
+                            return (
+                                {
+                                    id: `${user.studentId}`,
+                                    name: `${user.studentName}`,
+                                    fatherName: `${user.fatherName}`,
+                                    grade: `${user.grade}`,
+                                    contact: `${user.contact}`,
+                                    transportFee: `${this.state.filteredFeesArray.transportFee}`,
+                                    tuitionFee: `${this.state.filteredFeesArray.tuitionFee}`,
+
+                                    //   fees:user.filteredFees.map(fee=>({
+                                    //     month: `${fee.month}`,
+                                    //     year: `${fee.year}`,
+                                    // }))
+                                })
+                            });
+            
+            this.setState({studentData});
+            console.log(response);
+            })
+
   
     }
 
     handleChangeMonth = (e)=>{
-        this.setState({month:e.target.value});
-    }
-    onChangeAddStudent = (e)=>{
         this.setState({[e.target.name]:e.target.value});
+        this.setState({totalTransportFee:0});
+        this.setState({totalTuitionFee:0});
+        this.setState({totalFee:0});
+        this.getStudentFunction();
     }
     
-    onSubmitUpdateStudent = (e) =>{
-
-        e.preventDefault();
-
-        const {studentId, studentName, fatherName, grade, contact} = this.state;
-        const formBody = {studentId, studentName, fatherName, grade, contact};
-        const axios = require('axios');
-
-        axios({
-            method: 'put',
-            url: '/api/student/:studentId',
-            data: formBody,
-            // config: { headers: {'Content-Type': 'multipart/form-data' }}
-        })
-            .then(function (response) {
-                //handle success
-                console.log(response);
-            })
-            .catch(function (response) {
-                //handle error
-                console.log(response);
-            });
-       
-        
-        // this.setState({triggerRequest:true});
-
-    }
-    // setStateTrigger = (val) => {
-    //     this.setState({triggerRequest:val});
-    // }
-
-
+   
     render(){ 
 
 
-        const {studentId, studentName, fatherName, grade, contact, month, studentData} = this.state;
-
+        const {studentId, studentName, fatherName, grade, contact, selectedMonth, studentData} = this.state;
 
         return(
             <div className = 'StudentFee'>
+                
+                <div className = 'card-stats rightSide'>
+                    <div className = 'heading'>Statistics per month:</div>
+                    <hr className = 'line02'></hr>
+                    <div class='align-style'>
+                        <div className = 'structure-style'>
+                            <div className = 'stats'>Total Tution Fee:</div>
+                            <div className="numbers-styling">{this.state.totalTuitionFee} Rs</div>
+                        </div>
+                        <div className = 'structure-style'>
+                            <div className = 'stats'>Total Transport Fee:</div>
+                            <div className="numbers-styling">{this.state.totalTransportFee} Rs</div>
+                        </div>
+                        <div className = 'structure-style'>     
+                            <div className = 'stats'>Total Incoming Fee:</div>
+                            <div className="numbers-styling" >{this.state.totalFee} Rs</div>
+                        </div>
+                    </div>
+                </div>
+                   
                 <div class = "menuRow">
-                    <label>Month:
-                        <select class = "monthMenu" value = {month} onChange={this.handleChangeMonth}>
-                            <option defaultValue value = "Jan">Jan</option>
+                    <div className="label-style student-data-heading align-style-select-row">Student Data:<span className="notes-style">( Select month and year to show specific data. )</span></div>
+                    <label class="label-style label-font">Month: 
+                        <select className = "monthMenu" name = "selectedMonth" value = {selectedMonth} onChange={this.handleChangeMonth}>
+                            <option value = "Jan">Jan</option>
+                            <option value = "Feb">Feb</option>
+                            <option value = "Mar">Mar</option>
+                            <option value = "Apr">Apr</option>
+                            <option value = "May">May</option>
+                            <option value = "June">June</option>
+                            <option value = "July">July</option>
+                            <option value = "Aug">Aug</option>
+                            <option value = "Sept">Sept</option>
+                            <option value = "Oct">Oct</option>
+                            <option value = "Nov">Nov</option>
+                            <option value = "Dec">Dec</option>
+                        </select>
+                    </label>
+                    <label className=  "align-style-select-row label-font">Year: 
+                        <select className = "monthMenu" name = "selectedMonth" value = {selectedMonth} onChange={this.handleChangeMonth}>
+                            <option value = "Jan">Jan</option>
                             <option value = "Feb">Feb</option>
                             <option value = "Mar">Mar</option>
                             <option value = "Apr">Apr</option>
@@ -128,100 +178,26 @@ class StudentFee extends Component{
                         </select>
                     </label>
                 </div>
-                <div className = 'top'>
-                    <div className = 'table'><DataTable trigger01 = {this.getStudentFunction} trigger03 = {studentData}/></div>
-                    <div className = 'rightSide'>
-                        <div className = 'card extraCard'>
-                            <div className = 'heading'>Statistics per month:</div>
-                            <hr className = 'line02'></hr>
-                            <div className = 'stats'>Total Salary Fee:</div>
-                            <div>360000 Rs</div>
-                            <div className = 'stats'>Total Tution Fee:</div>
-                            <div>960000 Rs</div>
-                            <div className = 'stats'>Total Incoming Fee:</div>
-                            <div>1230000 Rs</div>
-                        </div>        
-                    </div>
-                </div>
-                <div className = 'bottom'>
-                    <div className = 'card forms leftMostForm'>
+
+                <div className = 'table'><DataTable trigger01 = {this.getStudentFunction} trigger03 = {studentData}/></div>
+
+                <div className="form-heading-style">Submit Form:<span className="notes-style">( Fill form to submit students data. )</span></div>
+                <div className='form-row'>
+                    <div className = 'card-design forms leftMostForm'>
                         <div className = 'heading'>Add Student:</div>
                         <hr className = 'line'></hr>
                         <AddStudent trigger03 = {this.getStudentFunction}/>
                         
                     </div>
-                    <div className = 'card forms'>
+                    <div className = 'card-design forms'>
                         <div className = 'heading'>Update Student:</div>
                         <hr className = 'line'></hr>
-                        <form onSubmit = {this.onSubmitUpdateStudent}>
-
-
-                            <h5>Student Id:</h5>
-                            <input class = 'input' type = 'text' name = 'studentId' value = {studentId} onChange = {this.onChangeAddStudent}/>
-
-                            <br/>
-
-                            <h5>Student Name:</h5>
-                            <input class = 'input' type = 'text' name = 'studentName' value = {studentName} onChange = {this.onChangeAddStudent}/>
-
-                            <br/>
-                            
-                            <h5>Father Name:</h5>
-                            <input class = 'input' type = 'text' name = 'fatherName' value = {fatherName} onChange = {this.onChangeAddStudent}/>
-
-                            <br/>
-
-                            <h5>Grade:</h5>
-                            <input class = 'input' type = 'text' name = 'grade' value = {grade} onChange = {this.onChangeAddStudent}/>
-
-                            <br/>
-
-                            <h5>Contact No:</h5>
-                            <input class = 'input' type = 'text' name = 'contact' value = {contact} onChange = {this.onChangeAddStudent}/>
-                            <br/>
-
-                            
-                            <MyButton className = 'button' type="submit">Update</MyButton>
-                        </form>
+                        <UpdateStudent trigger03 = {this.getStudentFunction}/>
                     </div>
-                    <div className = 'card forms'>
+                    <div className = 'card-design forms'>
                         <div className = 'heading'>Submit Fee:</div>
                         <hr className = 'line'></hr>
-                        <form onSubmit={(e) =>{
-                        e.preventDefault();
-                        const data = [...this.state.data,this.state.inputText];
-                        this.setState({data, inputText: ''});
-                        }}>
-
-                            <h5>Student Id:</h5>
-                            <input class = 'input' type = 'text' name = 'inputText' value = {this.state.inputText} 
-                            onChange = {(e) =>{this.setState({[e.target.name]:e.target.value})}}></input>
-                            
-                            <br/>
-                            
-                            <h5>Transport Fee:</h5>
-                            <input class = 'input' type = 'text' name = 'inputText' value = {this.state.inputText} 
-                            onChange = {(e) =>{this.setState({[e.target.name]:e.target.value})}}></input>
-                            <br></br>
-
-                            <h5>Education Fee:</h5>
-                            <input class = 'input' type = 'text' name = 'inputText' value = {this.state.inputText} 
-                            onChange = {(e) =>{this.setState({[e.target.name]:e.target.value})}}></input>
-                            <br></br>
-
-                            <h5>Month:</h5>
-                            <input class = 'input' type = 'text' name = 'inputText' value = {this.state.inputText} 
-                            onChange = {(e) =>{this.setState({[e.target.name]:e.target.value})}}></input>
-                            <br></br>
-
-                            <h5>Year:</h5>
-                            <input class = 'input' type = 'text' name = 'inputText' value = {this.state.inputText} 
-                            onChange = {(e) =>{this.setState({[e.target.name]:e.target.value})}}></input>
-                            <br></br>
-
-                            
-                            <MyButton className = 'button' type="submit">Submit</MyButton>
-                        </form>
+                        <SubmitFee trigger03 = {this.getStudentFunction}/>
                     </div>
                 </div>
             </div>

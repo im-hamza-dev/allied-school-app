@@ -37,7 +37,6 @@ class StaffPayment extends Component{
         return(
             <div className = 'StudentFee'>
                 <div className = 'top'>
-                    <div className = 'table'><ScrollableTabsButtonAuto/></div>
                     <div className = 'rightSide'>
                         <div className = 'card padLeft'>
                             <div><ControlledOpenSelect/></div>
