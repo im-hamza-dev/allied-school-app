@@ -5,14 +5,13 @@ body{
 }
 
 .fullScreen{
-    height: 100vh;
-
+    min-height: 100vh !important;
 }
 
 .left{
     width: 100%;
     height: 10vh;
-    background: url(./leftPortion.png) no-repeat center center fixed;
+    background: rgb(179, 32, 32);
     background-size: cover;
     display: flex;
     align-items: center;
@@ -43,7 +42,12 @@ body{
 
 .right{
     width:100%;
-    height: 90vh;
+    /* height: 90vh; */
+    /* height: auto !important; */
+    min-height: 100vh !important;
+    padding:0px;
+    margin:0px !important;
+    background: red !important;
     
 }
 .randomImg{

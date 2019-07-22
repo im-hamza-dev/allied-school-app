@@ -3,7 +3,7 @@ import './mainScreen.css';
 import './tabs'
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
-import { delay, async } from 'q';
+import { async } from 'q';
 
 
 const MyButton = styled(Button)({
@@ -21,10 +21,11 @@ const MyButton = styled(Button)({
   });
 
 
-class AddStudent extends Component{
+class UpdateStudent extends Component{
     constructor(props){
         super(props);
         this.state={
+            studentId:'',
             studentName:'',
             fatherName:'',
             contact:'',
@@ -32,29 +33,21 @@ class AddStudent extends Component{
             }
     }
 
-    onChangeAddStudent = (e)=>{
+    onChange = (e)=>{
         this.setState({[e.target.name]:e.target.value});
     }
-    sleep = (milliseconds) => {
-        var start = new Date().getTime();
-        for (var i = 0; i < 1e7; i++) {
-          if ((new Date().getTime() - start) > milliseconds){
-            break;
-          }
-        }
-      }
 
-    onSubmitAddStudent = async(e) =>{
+    onSubmitUpdate = async(e) =>{
 
         e.preventDefault();
-
-        const {studentName, fatherName, grade, contact} = this.state;
-        const formBody = {studentName, fatherName, grade, contact};
+        console.log("i'm in");
+        const {studentId, studentName, fatherName, grade, contact} = this.state;
+        const formBody = {studentId, studentName, fatherName, grade, contact};
         const axios = require('axios');
 
         await axios({
-            method: 'post',
-            url: '/api/student',
+            method: 'put',
+            url: '/api/student/'+ studentId,
             data: formBody,
             // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
@@ -66,7 +59,7 @@ class AddStudent extends Component{
                 //handle error
                 console.log(response);
             });
-           
+
             this.props.trigger03();
 
 
@@ -74,33 +67,37 @@ class AddStudent extends Component{
     
      
     render(){ 
-        const {studentName, fatherName, grade, contact} = this.state;
+        const {studentId, studentName, fatherName, grade, contact} = this.state;
         return(
-            <form onSubmit = {this.onSubmitAddStudent}>
+            <form onSubmit = {this.onSubmitUpdate}>
+                             <h5>Student Id:</h5>
+                            <input class = 'input' type = 'text' name = 'studentId' value = {studentId} onChange = {this.onChange}/>
+
+                            <br/>
 
                             <h5>Student Name:</h5>
-                            <input class = 'input' type = 'text' name = 'studentName' value = {studentName} onChange = {this.onChangeAddStudent}/>
+                            <input class = 'input' type = 'text' name = 'studentName' value = {studentName} onChange = {this.onChange}/>
 
                             <br/>
                             
                             <h5>Father Name:</h5>
-                            <input class = 'input' type = 'text' name = 'fatherName' value = {fatherName} onChange = {this.onChangeAddStudent}/>
+                            <input class = 'input' type = 'text' name = 'fatherName' value = {fatherName} onChange = {this.onChange}/>
 
                             <br/>
 
                             <h5>Grade:</h5>
-                            <input class = 'input' type = 'text' name = 'grade' value = {grade} onChange = {this.onChangeAddStudent}/>
+                            <input class = 'input' type = 'text' name = 'grade' value = {grade} onChange = {this.onChange}/>
 
                             <br/>
 
                             <h5>Contact No:</h5>
-                            <input class = 'input' type = 'text' name = 'contact' value = {contact} onChange = {this.onChangeAddStudent}/>
+                            <input class = 'input' type = 'text' name = 'contact' value = {contact} onChange = {this.onChange}/>
                             <br/>
 
                             
-                            <MyButton className = 'button' type="submit">Add</MyButton>
+                            <MyButton className = 'button' type="submit">Update</MyButton>
                         </form>
         );
     }
 }
-export default AddStudent;
+export default UpdateStudent;

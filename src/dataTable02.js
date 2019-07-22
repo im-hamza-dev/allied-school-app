@@ -19,8 +19,36 @@ class DataTable extends React.Component {
     }
   }
 
-  componentDidMount = () => {
-      this.props.trigger01();
+  
+  
+  
+  
+  // const [state, setState] = React.useState({
+  //   columns: [
+  //     { title: 'Id', field: 'id', type: 'numeric' },
+  //     { title: 'Name', field: 'name' },
+  //     { title: 'Father Name', field: 'surname'},
+  //     { title: 'Class', field: 'class'},
+  //     { title: 'Contact No.', field: 'number', type: 'numeric'},
+  //     { title: 'Transport Fee Status', field: 'transport fee'},
+  //     { title: 'Tution Fee Status', field: 'education fee'}
+  //   ],
+  //   data: [
+  //     { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
+  //     {
+  //       name: 'Zerya Betül',
+  //       surname: 'Baran',
+  //       birthYear: 2017,
+  //       birthCity: 34,
+  //     },
+  //   ],
+  // });
+
+     
+
+  
+  componentDidMount = ()=>{
+      this.props.trigger01();   
   //   const axios2 = require('axios');
   //   axios2.get("/api/fee")
   //   .then(response => {
@@ -60,13 +88,18 @@ render(){
         </TableHead>
         {trigger03 && <TableBody>
           {trigger03.map(user => {
-              const {id,name} = user;
+              const {id,name,fatherName,grade,contact,transportFee,tuitionFee} = user;
               return(
                 <TableRow key={id}>
                 <TableCell component="th" scope="row">
                     {id}
                 </TableCell>
                 <TableCell >{name}</TableCell>
+                <TableCell>{fatherName}</TableCell>
+                <TableCell>{grade}</TableCell>
+                <TableCell>{contact}</TableCell>
+                <TableCell>{transportFee}</TableCell>
+                <TableCell>{tuitionFee}</TableCell>
                 {/* <TableCell align="right">{studentData.fatherName}</TableCell>
                 <TableCell align="right">{studentData.grade}</TableCell>
                 <TableCell align="right">{studentData.section}</TableCell>
