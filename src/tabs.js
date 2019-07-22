@@ -41,6 +41,8 @@ export default function SimpleTabs() {
     setValue(newValue);
   }
 
+  console.log("THIS IS THE VALUE: ", value);
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -51,10 +53,10 @@ export default function SimpleTabs() {
           <Tab label="Total Income" />
         </Tabs>
       </AppBar>
-      {value === 0 && <TabContainer><StudentFee/></TabContainer>}
-      {value === 1 && <TabContainer><StaffPayment/></TabContainer>}
-      {value === 2 && <TabContainer><OtherExpense/></TabContainer>}
-      {value === 3 && <TabContainer><TotalIncome/></TabContainer>}
+      {value === 0 && <TabContainer><StudentFee /></TabContainer>}
+      {value === 1 && <TabContainer><StaffPayment /></TabContainer>}
+      {value === 2 && <TabContainer><OtherExpense /></TabContainer>}
+      {value === 3 && <TabContainer><TotalIncome /></TabContainer>}
     </div>
   );
 }

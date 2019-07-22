@@ -1,19 +1,12 @@
 import React, {Component} from 'react';
 import './studentFee.css';
 import './scrollTabs';
-import ScrollableTabsButtonAuto from './scrollTabs';
 import './yearSelection';
-import ControlledOpenSelect from './yearSelection';
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import './dataTable';
-import Axios from 'axios';
-import MaterialUIPickers from './datePicker';
-import MonthYearPicker from './datePicker';
-import DialogSelect from './datePicker';
 import DataTable from './dataTable02';
 import './datePicker';
-import DatePicker from './datePicker';
 import AddStudent from './addStudent';
 
   
@@ -57,27 +50,24 @@ class StudentFee extends Component{
             const studentData = response.data.students.map(user=>({
               id: `${user.studentId}`,
               name: `${user.studentName}`,
-          }))
+          }));
           this.setState({studentData});
         })
-  
-    }
+    };
 
     handleChangeMonth = (e)=>{
         this.setState({month:e.target.value});
-    }
+    };
+
     onChangeAddStudent = (e)=>{
         this.setState({[e.target.name]:e.target.value});
-    }
+    };
     
     onSubmitUpdateStudent = (e) =>{
-
         e.preventDefault();
-
         const {studentId, studentName, fatherName, grade, contact} = this.state;
         const formBody = {studentId, studentName, fatherName, grade, contact};
         const axios = require('axios');
-
         axios({
             method: 'put',
             url: '/api/student/:studentId',
@@ -102,12 +92,8 @@ class StudentFee extends Component{
     // }
 
 
-    render(){ 
-
-
+    render(){
         const {studentId, studentName, fatherName, grade, contact, month, studentData} = this.state;
-
-
         return(
             <div className = 'StudentFee'>
                 <div class = "menuRow">

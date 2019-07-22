@@ -32,8 +32,8 @@ class StaffPayment extends Component{
     }
     
      
-    render(){ 
-
+    render(){
+        console.log("NOW WE ARE HERE");
         return(
             <div className = 'StudentFee'>
                 <div className = 'top'>

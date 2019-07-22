@@ -37,6 +37,8 @@ export default function ScrollableTabsButtonAuto(props) {
   function handleChange(event, newValue) {
     setValue(newValue);
   }
+
+  console.log(props.trigger);
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">

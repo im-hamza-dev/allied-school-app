@@ -12,49 +12,21 @@ import Paper from '@material-ui/core/Paper';
 
 
 class DataTable extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state={
 
     }
-}
+  }
 
-  
-  
-  
-  
-  // const [state, setState] = React.useState({
-  //   columns: [
-  //     { title: 'Id', field: 'id', type: 'numeric' },
-  //     { title: 'Name', field: 'name' },
-  //     { title: 'Father Name', field: 'surname'},
-  //     { title: 'Class', field: 'class'},
-  //     { title: 'Contact No.', field: 'number', type: 'numeric'},
-  //     { title: 'Transport Fee Status', field: 'transport fee'},
-  //     { title: 'Tution Fee Status', field: 'education fee'}
-  //   ],
-  //   data: [
-  //     { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-  //     {
-  //       name: 'Zerya Betül',
-  //       surname: 'Baran',
-  //       birthYear: 2017,
-  //       birthCity: 34,
-  //     },
-  //   ],
-  // });
-
-     
-
-  
   componentDidMount = () => {
-      this.props.trigger01();   
+      this.props.trigger01();
   //   const axios2 = require('axios');
   //   axios2.get("/api/fee")
   //   .then(response => {
   //    console.log(response);
-  // }) 
-  }
+  // })
+  };
 render(){
     const {trigger03} = this.props;
     // console.log(this.props.monthProp);
