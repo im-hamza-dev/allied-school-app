@@ -35,7 +35,7 @@ class OtherExpense extends Component{
             expenseData:[],
             data:[],
             selectedMonthExpense:'June',
-            selectedYearExpense:'2019',
+            selectedYearExpense: '2019',
             filteredExpenseArray:{},
             totalExpense:0,
         }
@@ -43,14 +43,17 @@ class OtherExpense extends Component{
     
     getExpenseFunction = ()=>
     {
+        this.setState({totalExpense:0});
         const axios = require('axios');
-        axios.get("/api/student")
+        axios.get("/api/expense")
         .then(response =>
             {
+                console.log(response);
                 const filteredExpenseData = response.data.expenses.filter(expense =>
                     {
                         return (expense.month === this.state.selectedMonthExpense)&&(expense.year === this.state.selectedYearExpense);
                     });    
+                    console.log(filteredExpenseData);
                 const expenseData = filteredExpenseData.map(user=>
                     {
                         this.setState({totalExpense:this.state.totalExpense+user.amount});
@@ -73,13 +76,11 @@ class OtherExpense extends Component{
 
     handleChangeMonthExpense = (e)=>{
         this.setState({[e.target.name]:e.target.value});
-        this.setState({totalExpense:0});
-        this.getStudentFunction();
+        this.getExpenseFunction();
     }
     handleChangeYearExpense = (e)=>{
-        this.setState({[e.target.name]:parseInt(e.target.value)});
-        this.setState({totalExpense:0});
-        this.getStudentFunction();
+        this.setState({[e.target.name]:e.target.value});
+        this.getExpenseFunction();
     } 
 
 
@@ -101,7 +102,7 @@ class OtherExpense extends Component{
                 <div class = "menuRow-expense">
                     <div className="label-style-expense student-data-heading-expense align-style-select-row-expense">Expense Data:<span className="notes-style-expense">( Select month and year to show specific data. )</span></div>
                     <label class="label-style-expense label-font-expense">Month: 
-                        <select className = "monthMenu-expense" name = "selectedMonth" value = {this.state.selectedMonthExpense} onChange={this.handleChangeMonthExpense}>
+                        <select className = "monthMenu-expense" name = "selectedMonthExpense" value = {this.state.selectedMonthExpense} onChange={this.handleChangeMonthExpense}>
                             <option value = "Jan">Jan</option>
                             <option value = "Feb">Feb</option>
                             <option value = "Mar">Mar</option>
@@ -117,7 +118,7 @@ class OtherExpense extends Component{
                         </select>
                     </label>
                     <label className=  "align-style-select-row-expense label-font-expense">Year: 
-                        <select className = "monthMenu-expense" name = "selectedYear" value = {this.state.selectedYearExpense} onChange={this.handleChangeYearExpense}>
+                        <select className = "monthMenu-expense" name = "selectedYearExpense" value = {this.state.selectedYearExpense} onChange={this.handleChangeYearExpense}>
                             <option value = "2019">2019</option>
                             <option value = "2020">2020</option>
                             <option value = "2021">2021</option>
@@ -134,7 +135,7 @@ class OtherExpense extends Component{
                     </label>
                 </div>
 
-                <div className = 'table-expense'><DataTableExpense trigger01Expense = {this.getStudentFunction} trigger03Expense = {this.state.expenseData}/></div>
+                <div className = 'table-expense'><DataTableExpense trigger01Expense = {this.getExpenseFunction} trigger03Expense = {this.state.expenseData}/></div>
 
                 <div className="form-heading-style-expense">Submit Form:<span className="notes-style">( Fill form to submit expense data. )</span></div>
                 <div className='form-row-expense'>

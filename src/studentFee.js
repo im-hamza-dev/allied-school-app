@@ -59,6 +59,9 @@ class StudentFee extends Component{
 
     getStudentFunction = ()=>
     {
+        this.setState({totalTransportFee:0});
+        this.setState({totalTuitionFee:0});
+        this.setState({totalFee:0});
         const axios = require('axios');
         axios.get("/api/student")
         .then(response =>
@@ -110,16 +113,10 @@ class StudentFee extends Component{
 
     handleChangeMonth = (e)=>{
         this.setState({[e.target.name]:e.target.value});
-        this.setState({totalTransportFee:0});
-        this.setState({totalTuitionFee:0});
-        this.setState({totalFee:0});
         this.getStudentFunction();
     }
     handleChangeYear = (e)=>{
         this.setState({[e.target.name]:parseInt(e.target.value)});
-        this.setState({totalTransportFee:0});
-        this.setState({totalTuitionFee:0});
-        this.setState({totalFee:0});
         this.getStudentFunction();
     }
     

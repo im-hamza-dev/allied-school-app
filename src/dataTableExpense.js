@@ -53,8 +53,8 @@ render(){
                     {id}
                 </TableCell>
                 <TableCell >{title}</TableCell>
-                <TableCell>{comment}</TableCell>
                 <TableCell>{amount}</TableCell>
+                <TableCell>{comment}</TableCell>
                 <TableCell>{createdAt}</TableCell>
                 <TableCell>{updatedAt}</TableCell>
                 </TableRow>

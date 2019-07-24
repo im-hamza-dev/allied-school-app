@@ -55,8 +55,8 @@ class UpadteExpense extends Component{
         const axios = require('axios');
 
         await axios({
-            method: 'post',
-            url: '/api/student/'+ expenseId,
+            method: 'put',
+            url: '/api/expense/'+ expenseId,
             data: formBody,
             // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
@@ -78,29 +78,29 @@ class UpadteExpense extends Component{
     render(){ 
         const {expenseId, expenseTitle, comment, amount, month, year} = this.state;
         return(
-            <form onSubmit = {this.onSubmitAddExpense}>
+            <form onSubmit = {this.onSubmitUpdateExpense}>
 
                             <h5>Expense Id</h5>
-                            <input class = 'input' type = 'text' name = 'expenseId' value = {expenseId} onChange = {this.onChangeAddExpense}/>
+                            <input class = 'input' type = 'text' name = 'expenseId' value = {expenseId} onChange = {this.onChangeUpdateExpense}/>
 
                             <br/>
                             
                             <h5>Title:</h5>
-                            <input class = 'input' type = 'text' name = 'expenseTitle' value = {expenseTitle} onChange = {this.onChangeAddExpense}/>
+                            <input class = 'input' type = 'text' name = 'expenseTitle' value = {expenseTitle} onChange = {this.onChangeUpdateExpense}/>
 
                             <br/>
 
                             <h5>Amount:</h5>
-                            <input class = 'input' type = 'text' name = 'amount' value = {amount} onChange = {this.onChangeAddExpense}/>
+                            <input class = 'input' type = 'text' name = 'amount' value = {amount} onChange = {this.onChangeUpdateExpense}/>
 
                             <br/>
 
                             <h5>Comment:</h5>
-                            <input class = 'input' type = 'text' name = 'comment' value = {comment} onChange = {this.onChangeAddExpense}/>
+                            <input class = 'input' type = 'text' name = 'comment' value = {comment} onChange = {this.onChangeUpdateExpense}/>
                             <br/>
 
                             <h5>Month:</h5>
-                            <select className = "input" name = "month" value = {month} onChange={this.onChangeAddExpense}>
+                            <select className = "input" name = "month" value = {month} onChange={this.onChangeUpdateExpense}>
                             <option value = "Jan">Jan</option>
                             <option value = "Feb">Feb</option>
                             <option value = "Mar">Mar</option>
@@ -118,10 +118,10 @@ class UpadteExpense extends Component{
 
 
                             <h5>Year:</h5>
-                            <input class = 'input' type = 'text' name = 'year' value = {year} onChange = {this.onSubmitStaffSalary}/>
+                            <input class = 'input' type = 'text' name = 'year' value = {year} onChange = {this.onChangeUpdateExpense}/>
                             <br/>
                             
-                            <MyButton className = 'button' type="submit">Add</MyButton>
+                            <MyButton className = 'button' type="submit">Update</MyButton>
                         </form>
         );
     }

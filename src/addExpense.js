@@ -29,7 +29,7 @@ class AddExpense extends Component{
             comment:'',
             amount:'',
             month:'Jan',
-            year:'',
+            year: '',
             }
     }
 
@@ -55,7 +55,7 @@ class AddExpense extends Component{
 
         await axios({
             method: 'post',
-            url: '/api/student',
+            url: '/api/expense',
             data: formBody,
             // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
@@ -113,7 +113,7 @@ class AddExpense extends Component{
 
 
                             <h5>Year:</h5>
-                            <input class = 'input' type = 'text' name = 'year' value = {year} onChange = {this.onSubmitStaffSalary}/>
+                            <input class = 'input' type = 'text' name = 'year' value = {year} onChange = {this.onChangeAddExpense}/>
                             <br/>
                             
                             <MyButton className = 'button' type="submit">Add</MyButton>
