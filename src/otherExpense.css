@@ -1,82 +1,146 @@
-.StudentFee{
+.menuRow-expense{
+    width:87%;
+    margin-left: 80px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-family: 'poppins';
+    color: rgb(153, 148, 153);
+    display:inline-block;
+}
+.OtherExpense{
     width:100%;
-    height: 150vh;
+    height: auto !important;
+    display: block;
+    /* min-height: 100vh !important; */
+    margin: 0px !important;
+    background: rgb(245, 245, 245);
+    padding-top: 40px; 
 }
 
-.table{
-    width: 80%;
-    float: left;
+.table-expense{
+    width: 85% !important;
+    padding:5px !important;
+    margin-bottom: 60px;
+    margin-left: 80px;
+    border:1px solid grey;
+    transition: 1s;
+    border-radius: 5px;
+    background: white;
+    /* margin-left:30px !important;
+    margin-right:auto !important; */
 }
-.rightSide{
-    /* height: 66vh; */
-    width: 20%;
-    padding-top: 70px;
-    float:left;
+.table-expense:hover{
+    transform: translate(0px,2px);
+    box-shadow: 0px 0px 10px rgb(197, 197, 197);
+    padding:7px !important;
+    background-color: rgb(248, 248, 248);
+
 
 }
+.rightSide-expense{
+    width: 83% !important;
+    /* margin:auto !important; */
+    padding:20px !important;
+    margin-bottom: 40px;
+    margin-left:80px;
 
-.card{
+    
+}
+
+/* .card{
     background-color: white;
     margin-left: 5px;
+    margin-top: 0px !important;
     border-radius: 6px;
     box-shadow: 0px 0px 20px lightgray;
     padding: 20px;
     font-family: 'poppins';
     color: #B5B4B6;
 
+} */
+.card-stats-expense{
+    background-color: white;
+    font-family: 'poppins';
+    color: #B5B4B6;
+    border-radius: 4px;
+    border: 1px solid grey !important;
+    transition: 1s !important;
+    display: block !important;
+    clear: left !important;
+}
+.card-stats-expense:hover{
+    box-shadow: 0px 0px 10px rgb(197, 197, 197);
+    transform: translate(0px,2px);
+}
+.card-design-expense{
+    background-color: white;
+    margin-left: 5px;
+    margin-top: 0px !important;
+    border-radius: 6px;
+    /* box-shadow: 0px 0px 20px lightgray; */
+    padding: 20px;
+    font-family: 'poppins';
+    color: #B5B4B6;
+    border:1px solid grey;
+    transition: 1s !important;
+}
+.card-design-expense:hover{
+    box-shadow: 0px 0px 10px rgb(197, 197, 197);
+    transform: translate(0px,4px);
 }
 
-.padLeft{
-    padding-left: 95px;
-    padding-top: 0px;
+.padLeft-expense{
+    padding-left:  95px;
+    margin-bottom: 10px;
+    margin-top: 0px !important;
+
 }
-.stats{
+.stats-expense{
     padding-top: 20px;
     font-weight: bold;
-    color: #EB9FFA;
+    color: grey !important;
 }
 
-.buttonChanging{
+.buttonChanging-expense{
     
     background: black;
 }
 
-.buttonAdjust{
+.buttonAdjust-expense{
     margin-left: 5px;
     margin-bottom: 10px;
 }
 
-.bottomButton{
+.bottomButton-expense{
     margin-left: 55px;
 }
 
-.top{
+.top-expense{
     height: 70vh;
 }
-.bottom{
-    margin-top: 100px;
-    height: 30vh;
-}
 
-.heading{
+.heading-expense{
     font-weight: 600;
+    text-align: left;
 }
 
-.forms{
+.forms-expense{
     float: left;
     width: 25%;
     margin-left: 15px;
 }
 
-.leftMostForm{
+.leftMostForm-expense{
     margin-left: 80px;
 }
 
 h5{
     margin:0px;
     font-weight: normal;
+    color:grey;
+    /* margin-left: 38px !important; */
 }
-.loginButton{
+.loginButton-expense{
     color: white;
     padding-left: 20px;
     padding-right: 20px;
@@ -87,29 +151,121 @@ h5{
     border-radius: 5px;
 }
 
-.input{
-    width: 50%;
+.input-expense{
     margin-bottom: 10px;
-    color: grey;
+    border-radius: 7px;
+    padding: 10px;
+    color: rgb(160, 160, 160) !important;
+    border: 1px solid grey !important;
+    width: 80% !important;
+    /* margin-left: 38px !important; */
+
 }
 
-.line{
-    opacity: 0.4;
+.line-expense{
+    opacity: 1 !important;
     margin-bottom: 30px;
 }
 
-.line02{
-    opacity: 0.4;
-    margin-bottom: 20px;
+.line02-expense{
+    opacity: 1 !important;
+    
+    margin-bottom: 0px !important;
 }
 
 
-.heading{
+.heading-expense{
     font-weight: 600;
+    color:grey;
 }
-.button{
+.button-expense{
     margin-top: 20px;
 }
-.extraCard{
+.extraCard-expense{
     padding-bottom: 40px;
+}
+.monthMenu-expense{
+    padding: 10px;
+    font-weight: bold;
+    font-family: 'poppins';
+    color: grey;
+    background-color: white;
+    /* box-shadow: 0px 0px 10px lightgray; */
+    border: none;
+    border-radius: 5px;
+    margin-left: 20px;
+    border: 1px solid grey;
+    transition:0.4s;
+}
+.monthMenu-expense:hover{
+    box-shadow: 0px 0px 20px rgb(197, 197, 197);
+    transform: translate(0px,-3px);
+    background: grey;
+    color:white;
+}
+.label-style-expense{
+    float: left;
+    display: inline;
+    
+}
+.align-style-select-row-expense{
+    margin-left: 20px;
+}
+.structure-style-expense{
+    float: left;
+    display:inline;
+    width:30%;
+}
+.align-style-expense{
+    text-align: center !important;
+    margin-left: 40px;
+    display: inline-block !important;
+    width: 100%;
+}
+.numbers-styling-expense{
+    color:rgb(250, 48, 48);
+    font-size: 25px;
+}
+
+.stats-align-style-expense{
+    width: 100% !important;
+    margin-bottom: 40px !important;
+    background: black;
+    padding: 10px;
+
+}
+.student-data-heading-expense{
+    width:70%;
+    font-size: 25px;
+    color:grey;
+}
+.label-font-expense{
+    color:grey;
+}
+.notes-style-expense{
+    font-size:15px;
+    padding-left: 20px;
+    font-weight:300;
+}
+.button-expense{
+    background: black !important;
+}
+.button-expense:hover{
+    background: red !important;
+    border-radius: 4px;
+}
+.form-heading-style-expense{
+    color: grey;
+    font-weight: 700;
+    margin-left: 100px;
+    width: 80% !important;
+    margin-bottom: 20px;
+    font-size: 25px;
+    font-family: 'poppins';
+}
+.form-row-expense{
+    padding-bottom: 80px !important;
+    /* padding-bottom: 100px; */
+    width: 100%;
+    display: flex;
 }

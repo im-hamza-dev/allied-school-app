@@ -7,6 +7,9 @@ import ControlledOpenSelect from './yearSelection';
 import { makeStyles } from '@material-ui/core/styles';
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
+import DataTableExpense from './dataTableExpense';
+import AddExpense from './addExpense';
+import UpdateExpense from './updateExpense';
 
 const MyButton = styled(Button)({
     background: 'linear-gradient(45deg, #9343A3 30%, #B34CC7 90%)',
@@ -26,101 +29,125 @@ class OtherExpense extends Component{
     constructor(props){
         super(props);
         this.state={
-            
+            expenseTitle:'',
+            comment:'',
+            amount:'',
+            expenseData:[],
             data:[],
+            selectedMonthExpense:'June',
+            selectedYearExpense:'2019',
+            filteredExpenseArray:{},
+            totalExpense:0,
         }
     }
     
-     
+    getExpenseFunction = ()=>
+    {
+        const axios = require('axios');
+        axios.get("/api/student")
+        .then(response =>
+            {
+                const filteredExpenseData = response.data.expenses.filter(expense =>
+                    {
+                        return (expense.month === this.state.selectedMonthExpense)&&(expense.year === this.state.selectedYearExpense);
+                    });    
+                const expenseData = filteredExpenseData.map(user=>
+                    {
+                        this.setState({totalExpense:this.state.totalExpense+user.amount});
+                            return (
+                                {
+                                    id: `${user.expenseId}`,
+                                    title: `${user.expenseTitle}`,
+                                    comment: `${user.comment}`,
+                                    amount: `${user.amount}`,
+                                    createdAt: `${user.createdAt}`,
+                                    updatedAt: `${user.createdAt}`,
+                                })
+                    });
+            
+            this.setState({expenseData});
+            console.log(response);
+            })
+
+    }
+
+    handleChangeMonthExpense = (e)=>{
+        this.setState({[e.target.name]:e.target.value});
+        this.setState({totalExpense:0});
+        this.getStudentFunction();
+    }
+    handleChangeYearExpense = (e)=>{
+        this.setState({[e.target.name]:parseInt(e.target.value)});
+        this.setState({totalExpense:0});
+        this.getStudentFunction();
+    } 
+
+
     render(){ 
 
         return(
-            <div className = 'StudentFee'>
-                <div className = 'top'>
-                    {/* <div className = 'table'><ScrollableTabsButtonAuto/></div> */}
-                    <div className = 'rightSide'>
-                        <div className = 'card padLeft'>
-                            <div><ControlledOpenSelect/></div>
+            <div className = 'OtherExpense'>
+                
+                <div className = 'card-stats-expense rightSide-expense'>
+                    <div className = 'heading-expense'>Statistics per month:</div>
+                    <hr className = 'line02-expense'></hr>
+                    <div class='align-style-expense'>
+                        <div className = 'structure-style-expense'>
+                            <div className = 'stats-expense'>Total Expense:</div>
+                            <div className="numbers-styling-expense">{this.state.totalExpense} Rs</div>
                         </div>
-                        <div className = 'card extraCard'>
-                            <div className = 'heading'>Expense per month:</div>
-                            <hr className = 'line02'></hr>
-                            <div className = 'stats'>Total Expense:</div>
-                            <div>360000 Rs</div>
-                           
-                        </div>        
                     </div>
                 </div>
-                <div className = 'bottom'>
-                    <div className = 'card forms leftMostForm'>
-                        <div className = 'heading'>Add Expense:</div>
-                        <hr className = 'line'></hr>
-                        <form onSubmit={(e) =>{
-                        e.preventDefault();
-                        const data = [...this.state.data,this.state.inputText];
-                        this.setState({data, inputText: ''});
-                        }}>
+                <div class = "menuRow-expense">
+                    <div className="label-style-expense student-data-heading-expense align-style-select-row-expense">Expense Data:<span className="notes-style-expense">( Select month and year to show specific data. )</span></div>
+                    <label class="label-style-expense label-font-expense">Month: 
+                        <select className = "monthMenu-expense" name = "selectedMonth" value = {this.state.selectedMonthExpense} onChange={this.handleChangeMonthExpense}>
+                            <option value = "Jan">Jan</option>
+                            <option value = "Feb">Feb</option>
+                            <option value = "Mar">Mar</option>
+                            <option value = "Apr">Apr</option>
+                            <option value = "May">May</option>
+                            <option value = "June">June</option>
+                            <option value = "July">July</option>
+                            <option value = "Aug">Aug</option>
+                            <option value = "Sept">Sept</option>
+                            <option value = "Oct">Oct</option>
+                            <option value = "Nov">Nov</option>
+                            <option value = "Dec">Dec</option>
+                        </select>
+                    </label>
+                    <label className=  "align-style-select-row-expense label-font-expense">Year: 
+                        <select className = "monthMenu-expense" name = "selectedYear" value = {this.state.selectedYearExpense} onChange={this.handleChangeYearExpense}>
+                            <option value = "2019">2019</option>
+                            <option value = "2020">2020</option>
+                            <option value = "2021">2021</option>
+                            <option value = "2022">2022</option>
+                            <option value = "2023">2023</option>
+                            <option value = "2024">2024</option>
+                            <option value = "2025">2025</option>
+                            <option value = "2026">2026</option>
+                            <option value = "2027">2027</option>
+                            <option value = "2028">2028</option>
+                            <option value = "2029">2029</option>
+                            <option value = "2030">2030</option>
+                        </select>
+                    </label>
+                </div>
 
-                            <h5>Expense Id:</h5>
-                            <input class = 'input' type = 'text' name = 'inputText' value = {this.state.inputText} 
-                            onChange = {(e) =>{this.setState({[e.target.name]:e.target.value})}}></input>
-                            
-                            <br/>
+                <div className = 'table-expense'><DataTableExpense trigger01Expense = {this.getStudentFunction} trigger03Expense = {this.state.expenseData}/></div>
 
-                            <h5>Expense Name:</h5>
-                            <input class = 'input' type = 'text' name = 'inputText' value = {this.state.inputText} 
-                            onChange = {(e) =>{this.setState({[e.target.name]:e.target.value})}}></input>
-
-                            <br/>
-                            
-                            <h5>Comment:</h5>
-                            <input class = 'input' type = 'text' name = 'inputText' value = {this.state.inputText} 
-                            onChange = {(e) =>{this.setState({[e.target.name]:e.target.value})}}></input>
-                            <br></br>
-
-                            <h5>Amount:</h5>
-                            <input class = 'input' type = 'text' name = 'inputText' value = {this.state.inputText} 
-                            onChange = {(e) =>{this.setState({[e.target.name]:e.target.value})}}></input>
-                            <br></br>
-
-                            
-                            <MyButton className = 'button' type="submit">Update</MyButton>
-                        </form>
+                <div className="form-heading-style-expense">Submit Form:<span className="notes-style">( Fill form to submit expense data. )</span></div>
+                <div className='form-row-expense'>
+                    <div className = 'card-design-expense forms-expense leftMostForm-expense'>
+                        <div className = 'heading-expense'>Add Expense:</div>
+                        <hr className = 'line-expense'></hr>
+                        <AddExpense trigger03Expense = {this.getExpenseFunction}/>
+                        
                     </div>
-                    <div className = 'card forms'>
-                        <div className = 'heading'>Update Expense:</div>
-                        <hr className = 'line'></hr>
-                        <form onSubmit={(e) =>{
-                        e.preventDefault();
-                        const data = [...this.state.data,this.state.inputText];
-                        this.setState({data, inputText: ''});
-                        }}>
-
-                            <h5>Expense Id:</h5>
-                            <input class = 'input' type = 'text' name = 'inputText' value = {this.state.inputText} 
-                            onChange = {(e) =>{this.setState({[e.target.name]:e.target.value})}}></input>
-                            
-                            <br/>
-
-                            <h5>Expense Name:</h5>
-                            <input class = 'input' type = 'text' name = 'inputText' value = {this.state.inputText} 
-                            onChange = {(e) =>{this.setState({[e.target.name]:e.target.value})}}></input>
-
-                            <br/>
-                            
-                            <h5>Comment:</h5>
-                            <input class = 'input' type = 'text' name = 'inputText' value = {this.state.inputText} 
-                            onChange = {(e) =>{this.setState({[e.target.name]:e.target.value})}}></input>
-                            <br></br>
-
-                            <h5>Amount:</h5>
-                            <input class = 'input' type = 'text' name = 'inputText' value = {this.state.inputText} 
-                            onChange = {(e) =>{this.setState({[e.target.name]:e.target.value})}}></input>
-                            <br></br>
-
-                            
-                            <MyButton className = 'button' type="submit">Update</MyButton>
-                        </form>
+                    <div className = 'card-design-expense forms-expense'>
+                        <div className = 'heading-expense'>Update Expense:</div>
+                        <hr className = 'line-expense'></hr>
+                        <UpdateExpense trigger03Expense = {this.getExpenseFunction}/>
                     </div>
                 </div>
             </div>

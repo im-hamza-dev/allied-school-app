@@ -100,11 +100,6 @@ render(){
                 <TableCell>{contact}</TableCell>
                 <TableCell>{transportFee}</TableCell>
                 <TableCell>{tuitionFee}</TableCell>
-                {/* <TableCell align="right">{studentData.fatherName}</TableCell>
-                <TableCell align="right">{studentData.grade}</TableCell>
-                <TableCell align="right">{studentData.section}</TableCell>
-                <TableCell align="right">{studentData.contact}</TableCell> */}
-
                 </TableRow>
               );
             })}

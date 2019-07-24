@@ -32,7 +32,7 @@ const MyButton = styled(Button)({
     marginRight: 5,
     marginTop:20,
   });
-
+ 
 
 
 class StudentFee extends Component{
@@ -150,7 +150,6 @@ class StudentFee extends Component{
                         </div>
                     </div>
                 </div>
-                   
                 <div class = "menuRow">
                     <div className="label-style student-data-heading align-style-select-row">Student Data:<span className="notes-style">( Select month and year to show specific data. )</span></div>
                     <label class="label-style label-font">Month: 

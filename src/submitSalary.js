@@ -3,7 +3,7 @@ import './mainScreen.css';
 import './tabs'
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
-import { async } from 'q';
+import { delay, async } from 'q';
 
 
 const MyButton = styled(Button)({
@@ -21,33 +21,33 @@ const MyButton = styled(Button)({
   });
 
 
-class SubmitFee extends Component{
+class SubmitSalary extends Component{
     constructor(props){
         super(props);
         this.state={
-            studentId:'',
-            transportFee:'',
-            tuitionFee:'',
+            staffId:'',
             month:'Jan',
             year:'',
+            salary:'',
             }
     }
 
-    onChangeSubmitFee = (e)=>{
+    onChangeUpdateStaff = (e)=>{
         this.setState({[e.target.name]:e.target.value});
     }
+  
 
-    onSubmitsubmitFee = async(e) =>{
+    onSubmitStaffSalary = async(e) =>{
 
         e.preventDefault();
 
-        const {studentId, transportFee, tuitionFee, month, year} = this.state;
-        const formBody = {transportFee, tuitionFee, month, year, studentId};
+        const {staffId, month, year, salary} = this.state;
+        const formBody = {staffId, month, year, salary};
         const axios = require('axios');
 
         await axios({
             method: 'post',
-            url: '/api/fee',
+            url: '/api/student/',
             data: formBody,
             // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
@@ -59,33 +59,26 @@ class SubmitFee extends Component{
                 //handle error
                 console.log(response);
             });
-
-            this.props.trigger03();
+           
+            this.props.trigger03Staff();
 
 
     }
     
      
     render(){ 
-        const {studentId, transportFee, tuitionFee, month, year} = this.state;
+        const {staffId, month, year, salary} = this.state;
         return(
-            <form onSubmit = {this.onSubmitsubmitFee}>
+            <form onSubmit = {this.onSubmitAddStaff}>
 
-                            <h5>Student Id:</h5>
-                            <input class = 'input' type = 'text' name = 'studentId' value = {studentId} onChange = {this.onChangeSubmitFee}/>
+                            <h5>Staff Id:</h5>
+                            <input class = 'input' type = 'text' name = 'staffId' value = {staffId} onChange = {this.onSubmitStaffSalary}/>
+                            <br/>
 
+                            <h5>Salary:</h5>
+                            <input class = 'input' type = 'text' name = 'salary' value = {salary} onChange = {this.onSubmitStaffSalary}/>
                             <br/>
                             
-                            <h5>Transport Fee:</h5>
-                            <input class = 'input' type = 'text' name = 'transportFee' value = {transportFee} onChange = {this.onChangeSubmitFee}/>
-
-                            <br/>
-
-                            <h5>Tuition Fee:</h5>
-                            <input class = 'input' type = 'text' name = 'tuitionFee' value = {tuitionFee} onChange = {this.onChangeSubmitFee}/>
-
-                            <br/>
-
                             <h5>Month:</h5>
                             <select className = "input" name = "month" value = {month} onChange={this.onChangeSubmitFee}>
                             <option value = "Jan">Jan</option>
@@ -103,12 +96,15 @@ class SubmitFee extends Component{
                             </select>
                             <br/>
 
+
                             <h5>Year:</h5>
-                            <input class = 'input' type = 'text' name = 'year' value = {year} onChange = {this.onChangeSubmitFee}/>
+                            <input class = 'input' type = 'text' name = 'year' value = {year} onChange = {this.onSubmitStaffSalary}/>
                             <br/>
-                            <MyButton className = 'button' type="submit">Submit</MyButton>
+
+                            
+                            <MyButton className = 'button' type="submit">Update</MyButton>
                         </form>
         );
     }
 }
-export default SubmitFee;
+export default SubmitSalary;

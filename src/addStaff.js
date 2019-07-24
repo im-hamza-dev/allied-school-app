@@ -21,35 +21,27 @@ const MyButton = styled(Button)({
   });
 
 
-class AddStudent extends Component{
+class AddStaff extends Component{
     constructor(props){
         super(props);
         this.state={
-            studentName:'',
-            fatherName:'',
+            staffName:'',
+            position:'',
             contact:'',
-            grade:'',
             }
     }
 
-    onChangeAddStudent = (e)=>{
+    onChangeAddStaff = (e)=>{
         this.setState({[e.target.name]:e.target.value});
     }
-    // sleep = (milliseconds) => {
-    //     var start = new Date().getTime();
-    //     for (var i = 0; i < 1e7; i++) {
-    //       if ((new Date().getTime() - start) > milliseconds){
-    //         break;
-    //       }
-    //     }
-    //   }
+  
 
-    onSubmitAddStudent = async(e) =>{
+    onSubmitAddStaff = async(e) =>{
 
         e.preventDefault();
 
-        const {studentName, fatherName, grade, contact} = this.state;
-        const formBody = {studentName, fatherName, grade, contact};
+        const {staffName, position, contact} = this.state;
+        const formBody = {staffName, position, contact};
         const axios = require('axios');
 
         await axios({
@@ -67,30 +59,24 @@ class AddStudent extends Component{
                 console.log(response);
             });
            
-            this.props.trigger03();
+            this.props.trigger03Staff();
 
 
     }
     
      
     render(){ 
-        const {studentName, fatherName, grade, contact} = this.state;
+        const {staffName, position, contact} = this.state;
         return(
-            <form onSubmit = {this.onSubmitAddStudent}>
+            <form onSubmit = {this.onSubmitAddStaff}>
 
-                            <h5>Student Name:</h5>
-                            <input class = 'input' type = 'text' name = 'studentName' value = {studentName} onChange = {this.onChangeAddStudent}/>
+                            <h5>Staff Name:</h5>
+                            <input class = 'input' type = 'text' name = 'staffName' value = {staffName} onChange = {this.onChangeAddStaff}/>
 
                             <br/>
                             
-                            <h5>Father Name:</h5>
-                            <input class = 'input' type = 'text' name = 'fatherName' value = {fatherName} onChange = {this.onChangeAddStudent}/>
-
-                            <br/>
-
-                            <h5>Grade:</h5>
-                            <input class = 'input' type = 'text' name = 'grade' value = {grade} onChange = {this.onChangeAddStudent}/>
-
+                            <h5>Position:</h5>
+                            <input class = 'input' type = 'text' name = 'position' value = {position} onChange = {this.onChangeAddStaff}/>
                             <br/>
 
                             <h5>Contact No:</h5>
@@ -103,4 +89,4 @@ class AddStudent extends Component{
         );
     }
 }
-export default AddStudent;
+export default AddStaff;
