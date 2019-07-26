@@ -44,10 +44,10 @@ body{
     width:100%;
     /* height: 90vh; */
     height: auto !important;
-    /* min-height: 100vh !important; */
+    min-height: 86vh !important;
     padding:0px;
     margin:0px !important;
-    background: red !important;
+    /* background: rgb(245, 245, 245); */
     
 }
 .randomImg{

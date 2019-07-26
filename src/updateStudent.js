@@ -49,7 +49,6 @@ class UpdateStudent extends Component{
             method: 'put',
             url: '/api/student/'+ studentId,
             data: formBody,
-            // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
             .then(function (response) {
                 //handle success
@@ -61,11 +60,8 @@ class UpdateStudent extends Component{
             });
 
             this.props.trigger03();
-
-
     }
     
-     
     render(){ 
         const {studentId, studentName, fatherName, grade, contact} = this.state;
         return(

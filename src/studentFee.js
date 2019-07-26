@@ -1,22 +1,15 @@
 import React, {Component} from 'react';
 import './studentFee.css';
 import './scrollTabs';
-import ScrollableTabsButtonAuto from './scrollTabs';
-import './yearSelection';
-import ControlledOpenSelect from './yearSelection';
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import './dataTable';
-import Axios from 'axios';
-import MaterialUIPickers from './datePicker';
-import MonthYearPicker from './datePicker';
-import DialogSelect from './datePicker';
 import DataTable from './dataTable02';
 import './datePicker';
-import DatePicker from './datePicker';
 import AddStudent from './addStudent';
 import UpdateStudent from './updateStudent';
 import SubmitFee from './submitFee';
+import { async } from 'q';
 
   
 const MyButton = styled(Button)({
@@ -59,16 +52,15 @@ class StudentFee extends Component{
 
     getStudentFunction = ()=>
     {
-        this.setState({totalTransportFee:0});
-        this.setState({totalTuitionFee:0});
-        this.setState({totalFee:0});
         const axios = require('axios');
         axios.get("/api/student")
         .then(response =>
             {
+                console.log("helo");
+                this.setState({totalTransportFee:0, totalTuitionFee:0, totalFee:0});
                 const studentData = response.data.students.map(user=>
                     {
-                        console.log(user.fees);
+                        // console.log(user.fees);
                         const filteredFees = user.fees.filter(fee =>
                             {
                                 // console.log(this.state.selectedMonth);
@@ -84,8 +76,8 @@ class StudentFee extends Component{
                             else{
                                 this.setState({filteredFeesArray:{transportFee: 0, tuitionFee: 0}})
                             }
-                            console.log(this.state.totalTransportFee);
-                            console.log(this.state.filteredFeesArray);
+                            // console.log(this.state.totalTransportFee);
+                            // console.log(this.state.filteredFeesArray);
 
                             return (
                                 {
@@ -96,11 +88,6 @@ class StudentFee extends Component{
                                     contact: `${user.contact}`,
                                     transportFee: `${this.state.filteredFeesArray.transportFee}`,
                                     tuitionFee: `${this.state.filteredFeesArray.tuitionFee}`,
-
-                                    //   fees:user.filteredFees.map(fee=>({
-                                    //     month: `${fee.month}`,
-                                    //     year: `${fee.year}`,
-                                    // }))
                                 })
                             });
             
@@ -116,6 +103,7 @@ class StudentFee extends Component{
         this.getStudentFunction();
     }
     handleChangeYear = (e)=>{
+        
         this.setState({[e.target.name]:parseInt(e.target.value)});
         this.getStudentFunction();
     }
@@ -124,7 +112,7 @@ class StudentFee extends Component{
     render(){ 
 
 
-        const {studentId, studentName, fatherName, grade, contact, selectedMonth, selectedYear, studentData} = this.state;
+        const {selectedMonth, selectedYear, studentData} = this.state;
 
         return(
             <div className = 'StudentFee'>

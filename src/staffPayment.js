@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import './staffPayment.css';
 import './scrollTabs';
-import ScrollableTabsButtonAuto from './scrollTabs';
 import './yearSelection';
-import ControlledOpenSelect from './yearSelection';
-import { makeStyles } from '@material-ui/core/styles';
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import DataTableStaff from './dataTableStaff';
@@ -46,8 +43,9 @@ class StaffPayment extends Component{
     
     getStaffFunction = ()=>
     {
+        this.setState({totalSalary:0});
         const axios = require('axios');
-        axios.get("/api/student")
+        axios.get("/api/staff")
         .then(response =>
             {
                 const staffData = response.data.staffs.map(user=>
@@ -77,7 +75,7 @@ class StaffPayment extends Component{
                                     contact: `${user.contact}`,
                                     salary: `${this.state.filteredSalaryArray.salary}`,
                                 })
-                            });
+                    });
             
             this.setState({staffData});
             console.log(response);
@@ -88,12 +86,10 @@ class StaffPayment extends Component{
 
     handleChangeMonthStaff = (e)=>{
         this.setState({[e.target.name]:e.target.value});
-        this.setState({totalSalary:0});
         this.getStudentFunction();
     }
     handleChangeYearStaff = (e)=>{
         this.setState({[e.target.name]:parseInt(e.target.value)});
-        this.setState({totalSalary:0});
         this.getStudentFunction();
     }
      

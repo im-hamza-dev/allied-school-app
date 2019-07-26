@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import './otherExpense.css';
 import './scrollTabs';
-import ScrollableTabsButtonAuto from './scrollTabs';
 import './yearSelection';
-import ControlledOpenSelect from './yearSelection';
-import { makeStyles } from '@material-ui/core/styles';
+
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import DataTableExpense from './dataTableExpense';
@@ -43,17 +41,17 @@ class OtherExpense extends Component{
     
     getExpenseFunction = ()=>
     {
-        this.setState({totalExpense:0});
         const axios = require('axios');
         axios.get("/api/expense")
         .then(response =>
             {
-                console.log(response);
+                this.setState({totalExpense:0});
+                // console.log(response);
                 const filteredExpenseData = response.data.expenses.filter(expense =>
                     {
                         return (expense.month === this.state.selectedMonthExpense)&&(expense.year === this.state.selectedYearExpense);
                     });    
-                    console.log(filteredExpenseData);
+                    // console.log(filteredExpenseData);
                 const expenseData = filteredExpenseData.map(user=>
                     {
                         this.setState({totalExpense:this.state.totalExpense+user.amount});
@@ -69,7 +67,7 @@ class OtherExpense extends Component{
                     });
             
             this.setState({expenseData});
-            console.log(response);
+            // console.log(response);
             })
 
     }

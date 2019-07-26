@@ -35,14 +35,6 @@ class AddStudent extends Component{
     onChangeAddStudent = (e)=>{
         this.setState({[e.target.name]:e.target.value});
     }
-    // sleep = (milliseconds) => {
-    //     var start = new Date().getTime();
-    //     for (var i = 0; i < 1e7; i++) {
-    //       if ((new Date().getTime() - start) > milliseconds){
-    //         break;
-    //       }
-    //     }
-    //   }
 
     onSubmitAddStudent = async(e) =>{
 
@@ -56,7 +48,6 @@ class AddStudent extends Component{
             method: 'post',
             url: '/api/student',
             data: formBody,
-            // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
             .then(function (response) {
                 //handle success

@@ -49,7 +49,6 @@ class SubmitFee extends Component{
             method: 'post',
             url: '/api/fee',
             data: formBody,
-            // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
             .then(function (response) {
                 //handle success

@@ -46,7 +46,7 @@ class AddStaff extends Component{
 
         await axios({
             method: 'post',
-            url: '/api/student',
+            url: '/api/staff',
             data: formBody,
             // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })

@@ -47,7 +47,7 @@ class UpdateStaff extends Component{
 
         await axios({
             method: 'put',
-            url: '/api/student/'+staffId,
+            url: '/api/staff/' + staffId,
             data: formBody,
             // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
