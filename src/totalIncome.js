@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './totalIncome.css';
 import './scrollTabs';
 import './yearSelection';
+import { async } from 'q';
 
 class TotalIncome extends Component{
     constructor(props){
@@ -17,12 +18,12 @@ class TotalIncome extends Component{
         }
     }
 
-    getData = () => {
+    getData = async() => {
         const axios = require('axios');
-        axios.get("/api/student/")
+        await axios.get("/api/student/")
         .then(response =>
             {
-                this.setState({totalExpensePaid:0, totalIncomingFee:0, totalSalaryPaid:0, totalIncome:0});
+                this.setState({totalIncomingFee:0});
                 const dataStudent = response.data.students.map(student =>
                 {
                     const filteredStudent = student.fees.filter(fee =>
@@ -41,9 +42,10 @@ class TotalIncome extends Component{
                     return ({});
                 })
             })
-        axios.get("/api/expense")
+        await axios.get("/api/expense")
         .then(response =>
             {
+                this.setState({totalExpensePaid:0});
                 const dataExpense = response.data.expenses.filter(expense =>
                 {
                     console.log(expense)
@@ -60,11 +62,30 @@ class TotalIncome extends Component{
                         return({});
                     })
             })
-        // axios.get()
-        // .then(response =>
-        //     {
-                
-        //     })
+        await axios.get("/api/staff")
+        .then(response =>
+            {
+                this.setState({totalSalaryPaid:0});
+                const dataStaff = response.data.staff.map(staffSingle =>
+                    {
+                        const filteredStaff = staffSingle.StaffSalary.filter(salarySingle =>
+                    
+                            {
+                                // console.log(fee);
+                                return (salarySingle.month === this.state.selectedMonthTotal)&&(salarySingle.year === this.state.selectedYearTotal);
+                            })
+                            // console.log(filteredData);
+                            // console.log(student);
+                            // console.log(filteredData);
+                            if(filteredStaff[0])
+                            {
+                                this.setState({totalSalaryPaid:this.state.totalSalaryPaid + filteredStaff[0].salary});
+                            }
+                            return ({});
+                    })
+            })
+            // this.setState({totalIncome:0});
+            this.setState({totalIncome:this.state.totalIncomingFee - (this.state.totalExpensePaid + this.state.totalSalaryPaid)});
     }
     componentDidMount = () => {
         this.getData();
@@ -128,7 +149,7 @@ class TotalIncome extends Component{
                         </div>
                         <div className = 'structure-style-total'>
                             <div className = 'stats-total'>Total Salary Paid:</div>
-                            <div className="numbers-styling-total"> Rs</div>
+                            <div className="numbers-styling-total">{this.state.totalSalaryPaid} Rs</div>
                         </div>
                         <div className = 'structure-style-total'>
                             <div className = 'stats-total'>Total Expense:</div>
@@ -138,7 +159,7 @@ class TotalIncome extends Component{
                     {/* <hr className = 'line03-total'></hr> */}
 
                 </div>
-                <div className="label-style-total student-data-heading-total align-style-select-row-total menuRow-total final-statement">Final Statement:<span className="notes-style-total">Total Income of {this.state.selectedMonthTotal} {this.state.selectedYearTotal} is ... </span></div>
+                <div className="label-style-total student-data-heading-total align-style-select-row-total menuRow-total final-statement">Final Statement:<span className="notes-style-total">Total Income of {this.state.selectedMonthTotal} {this.state.selectedYearTotal} is <span className="final-amount-style">{this.state.totalIncome} Rs</span></span></div>
 
                 
             </div>

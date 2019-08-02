@@ -7,10 +7,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 
-
-
-
-
 class DataTableStaff extends React.Component {
   constructor(props){
     super(props);

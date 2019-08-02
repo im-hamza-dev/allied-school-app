@@ -69,7 +69,7 @@ class AddExpense extends Component{
             });
            
             this.props.trigger03Expense();
-
+            this.setState({expenseTitle:'', comment:'', amount:'', month:"Jan", year:''});
 
     }
     

@@ -37,7 +37,7 @@ class AddStaff extends Component{
   
 
     onSubmitAddStaff = async(e) =>{
-
+ 
         e.preventDefault();
 
         const {staffName, position, contact} = this.state;
@@ -60,6 +60,7 @@ class AddStaff extends Component{
             });
            
             this.props.trigger03Staff();
+            this.setState({staffName:'', position:'', contact:''});
 
 
     }
@@ -80,7 +81,7 @@ class AddStaff extends Component{
                             <br/>
 
                             <h5>Contact No:</h5>
-                            <input class = 'input' type = 'text' name = 'contact' value = {contact} onChange = {this.onChangeAddStudent}/>
+                            <input class = 'input' type = 'text' name = 'contact' value = {contact} onChange = {this.onChangeAddStaff}/>
                             <br/>
 
                             

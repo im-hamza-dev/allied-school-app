@@ -43,15 +43,17 @@ class StaffPayment extends Component{
     
     getStaffFunction = ()=>
     {
-        this.setState({totalSalary:0});
+        console.log("helo friends i'm in");
         const axios = require('axios');
         axios.get("/api/staff")
         .then(response =>
             {
-                const staffData = response.data.staffs.map(user=>
+                console.log("i'm in to response")
+                console.log(response);
+                this.setState({totalSalary:0});
+                const staffData = response.data.staff.map(user=>
                     {
-                        console.log(user.salary);
-                        const filteredSalary = user.salary.filter(singleSalary =>
+                        const filteredSalary = user.StaffSalary.filter(singleSalary =>
                             {
                                 // console.log(this.state.selectedMonth);
                                 // console.log(fee.month);
@@ -80,17 +82,18 @@ class StaffPayment extends Component{
             this.setState({staffData});
             console.log(response);
             })
+            
 
   
     }
 
     handleChangeMonthStaff = (e)=>{
         this.setState({[e.target.name]:e.target.value});
-        this.getStudentFunction();
+        this.getStaffFunction();
     }
     handleChangeYearStaff = (e)=>{
-        this.setState({[e.target.name]:parseInt(e.target.value)});
-        this.getStudentFunction();
+        this.setState({[e.target.name]:e.target.value});
+        this.getStaffFunction();
     }
      
     render(){ 

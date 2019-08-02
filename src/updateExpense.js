@@ -70,6 +70,14 @@ class UpadteExpense extends Component{
             });
            
             this.props.trigger03Expense();
+            this.setState({
+                expenseId:'',
+                expenseTitle:'',
+                comment:'',
+                amount:'',
+                month:'Jan',
+                year:'',
+                })
 
 
     }

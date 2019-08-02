@@ -243,9 +243,9 @@ h5{
     color:grey;
 }
 .notes-style-total{
-    font-size:15px;
-    padding-left: 20px;
-    font-weight:300;
+    font-size:20px;
+    padding-left: 40px;
+    font-weight:500;
 }
 .button-total{
     background: black !important;
@@ -274,5 +274,15 @@ h5{
     width:60%;
 }
 .final-statement{
+    margin-top: 20px;
     padding-left: 80px !important;
+}
+.final-amount-style{
+    color:red;
+    font-size: 30px;
+    padding-left: 10px;
+    transition:0.5s;
+}
+.final-amount-style:hover{
+    color:black;
 }

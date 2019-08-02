@@ -60,6 +60,7 @@ class SubmitFee extends Component{
             });
 
             this.props.trigger03();
+            this.setState({studentId:'', transportFee:'', tuitionFee:'', month:'Jan', year:''});
 
 
     }

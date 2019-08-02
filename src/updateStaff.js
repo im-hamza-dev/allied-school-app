@@ -61,6 +61,10 @@ class UpdateStaff extends Component{
             });
            
             this.props.trigger03Staff();
+            this.setState({staffId:'',
+            staffName:'',
+            position:'',
+            contact:'',});
 
 
     }
@@ -69,7 +73,7 @@ class UpdateStaff extends Component{
     render(){
         const {staffId, staffName, position, contact} = this.state;
         return(
-            <form onSubmit = {this.onSubmitAddStaff}>
+            <form onSubmit = {this.onSubmitUpdateStaff}>
 
                             <h5>Staff Id:</h5>
                             <input class = 'input' type = 'text' name = 'staffId' value = {staffId} onChange = {this.onChangeUpdateStaff}/>

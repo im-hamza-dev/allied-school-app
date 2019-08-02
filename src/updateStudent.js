@@ -60,6 +60,7 @@ class UpdateStudent extends Component{
             });
 
             this.props.trigger03();
+            this.setState({studentId:'', studentName:'', fatherName:'', grade:'', contact:''});
     }
     
     render(){ 

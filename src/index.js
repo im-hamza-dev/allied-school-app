@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Main from './mainScreen';
+// import Login from './loginScreen';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<Main />, document.getElementById('root'));

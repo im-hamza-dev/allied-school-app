@@ -32,7 +32,7 @@ class SubmitSalary extends Component{
             }
     }
 
-    onChangeUpdateStaff = (e)=>{
+    onChangeSalary = (e)=>{
         this.setState({[e.target.name]:e.target.value});
     }
   
@@ -42,12 +42,12 @@ class SubmitSalary extends Component{
         e.preventDefault();
 
         const {staffId, month, year, salary} = this.state;
-        const formBody = {staffId, month, year, salary};
+        const formBody = {salary, month, year, staffId};
         const axios = require('axios');
 
         await axios({
             method: 'post',
-            url: '/api/student/',
+            url: '/api/salary',
             data: formBody,
             // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
@@ -61,7 +61,10 @@ class SubmitSalary extends Component{
             });
            
             this.props.trigger03Staff();
-
+            this.setState({staffId:'',
+            month:'Jan',
+            year:'',
+            salary:'',});
 
     }
     
@@ -69,18 +72,18 @@ class SubmitSalary extends Component{
     render(){ 
         const {staffId, month, year, salary} = this.state;
         return(
-            <form onSubmit = {this.onSubmitAddStaff}>
+            <form onSubmit = {this.onSubmitStaffSalary}>
 
                             <h5>Staff Id:</h5>
-                            <input class = 'input' type = 'text' name = 'staffId' value = {staffId} onChange = {this.onSubmitStaffSalary}/>
+                            <input class = 'input' type = 'text' name = 'staffId' value = {staffId} onChange = {this.onChangeSalary}/>
                             <br/>
 
                             <h5>Salary:</h5>
-                            <input class = 'input' type = 'text' name = 'salary' value = {salary} onChange = {this.onSubmitStaffSalary}/>
+                            <input class = 'input' type = 'text' name = 'salary' value = {salary} onChange = {this.onChangeSalary}/>
                             <br/>
                             
                             <h5>Month:</h5>
-                            <select className = "input" name = "month" value = {month} onChange={this.onChangeSubmitFee}>
+                            <select className = "input" name = "month" value = {month} onChange={this.onChangeSalary}>
                             <option value = "Jan">Jan</option>
                             <option value = "Feb">Feb</option>
                             <option value = "Mar">Mar</option>
@@ -98,11 +101,11 @@ class SubmitSalary extends Component{
 
 
                             <h5>Year:</h5>
-                            <input class = 'input' type = 'text' name = 'year' value = {year} onChange = {this.onSubmitStaffSalary}/>
+                            <input class = 'input' type = 'text' name = 'year' value = {year} onChange = {this.onChangeSalary}/>
                             <br/>
 
                             
-                            <MyButton className = 'button' type="submit">Update</MyButton>
+                            <MyButton className = 'button' type="submit">Submit</MyButton>
                         </form>
         );
     }

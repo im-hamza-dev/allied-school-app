@@ -59,6 +59,7 @@ class AddStudent extends Component{
             });
            
             this.props.trigger03();
+            this.setState({studentName:'', fatherName:'', contact:'', grade:''});
 
 
     }
