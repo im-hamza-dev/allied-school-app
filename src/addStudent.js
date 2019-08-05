@@ -4,6 +4,8 @@ import './tabs'
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import { delay, async } from 'q';
+import {Alert} from 'reactstrap'
+import AlterDialog from './alertForm';
 
 
 const MyButton = styled(Button)({
@@ -51,10 +53,12 @@ class AddStudent extends Component{
         })
             .then(function (response) {
                 //handle success
+                alert("Student Created");
                 console.log(response);
             })
             .catch(function (response) {
                 //handle error
+                alert("Request Failed");
                 console.log(response);
             });
            
