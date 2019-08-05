@@ -4,6 +4,7 @@ import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import FormDialog from './dialogFormSignUp';
 import { Dialog } from '@material-ui/core';
+// import { url } from 'inspector';
 
 
 const MyButton = styled(Button)({
@@ -35,14 +36,41 @@ class Login extends Component{
     constructor(props){
         super(props);
         this.state={
-            userName:"",
+            email:"",
             password:"",
             data:[],
 
         }
     }
 
-    onSubmitLogin = () => {
+    onSubmitLogin = async(e) => {
+        e.preventDefault();
+
+
+        const {email,password} = this.state;
+        const formBody = {email, password};
+        const axios = require('axios');
+        await axios({
+            method:'post',
+            url:'/api/login',
+            data:formBody,
+        })
+        .then(function(response){
+            // console.log(response.data);
+            if(response.data.status===200){
+                alert("Login Successful");
+            }
+            else{
+                alert("Invalid Credentials");
+            }
+        })
+        .catch(function (response) {
+            //handle error
+            alert("Invalid Credentials");
+            // console.log(response);
+        });
+
+        this.setState({email:'',password:''});
 
     }
 
@@ -59,7 +87,7 @@ class Login extends Component{
                         <div><img class = 'logo-login' src='logoAllied.png' alt='Allied School'/></div>
                         <form onSubmit= {this.onSubmitLogin} className = "form-style">
                             <h5>Username:</h5>
-                            <input class = 'input-login' type = 'text' name = 'userName' value = {this.state.userName} 
+                            <input class = 'input-login' type = 'text' name = 'email' value = {this.state.email} 
                             onChange = {this.handleChangeLogin}></input>
                             <br/>
                             <h5>Password:</h5>
