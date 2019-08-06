@@ -6,6 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { async } from 'q';
 
 class FormDialog extends Component {
   constructor(props){
@@ -18,8 +19,18 @@ class FormDialog extends Component {
   }
 }
 //Dialog 01 functions...start
-  handleClickOpen = () => {
+  handleClickOpen = async(e) => {
+    e.preventDefault();
+
     this.setState({open:true});
+
+    const axios = require('axios');
+    await axios({
+        method:'post',
+        url:'/api/forgot-password',
+        // data:formBody,
+    })
+
     //code to request sending email from backend...
   }
 

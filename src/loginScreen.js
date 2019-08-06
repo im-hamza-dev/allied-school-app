@@ -3,6 +3,7 @@ import './loginScreen.css';
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import FormDialog from './dialogFormSignUp';
+import { withRouter } from 'react-router-dom';
 import { Dialog } from '@material-ui/core';
 // import { url } from 'inspector';
 
@@ -46,7 +47,7 @@ class Login extends Component{
     onSubmitLogin = async(e) => {
         e.preventDefault();
 
-
+        const {history} = this.props;
         const {email,password} = this.state;
         const formBody = {email, password};
         const axios = require('axios');
@@ -59,6 +60,7 @@ class Login extends Component{
             // console.log(response.data);
             if(response.data.status===200){
                 alert("Login Successful");
+                history.push("/main")
             }
             else{
                 alert("Invalid Credentials");
@@ -66,8 +68,8 @@ class Login extends Component{
         })
         .catch(function (response) {
             //handle error
-            alert("Invalid Credentials");
-            // console.log(response);
+            alert("Invalid Credentialsdfdf");
+            console.log(response);
         });
 
         this.setState({email:'',password:''});
