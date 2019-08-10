@@ -43,14 +43,19 @@ class StaffPayment extends Component{
     
     getStaffFunction = ()=>
     {
+        var config = {
+            headers: {'Authorization': "bearer " + localStorage.getItem("Token")}
+        };
         console.log("helo friends i'm in");
         const axios = require('axios');
-        axios.get("/api/staff")
+        axios.get("/api/staff", config)
         .then(response =>
             {
                 console.log("i'm in to response")
                 console.log(response);
                 this.setState({totalSalary:0});
+                if(localStorage.getItem("Token"))
+                {
                 const staffData = response.data.staff.map(user=>
                     {
                         const filteredSalary = user.StaffSalary.filter(singleSalary =>
@@ -79,8 +84,13 @@ class StaffPayment extends Component{
                                 })
                     });
             
-            this.setState({staffData});
-            console.log(response);
+                this.setState({staffData});
+                console.log(response);
+                }
+                else{
+                    alert(response.data.err + "   Login Please");
+                    console.log(response);
+                }
             })
             
 

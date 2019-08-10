@@ -58,11 +58,20 @@ class UpadteExpense extends Component{
             method: 'put',
             url: '/api/expense/'+ expenseId,
             data: formBody,
+            headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
+
             // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
             .then(function (response) {
                 //handle success
-                console.log(response);
+                if(localStorage.getItem("Token"))
+                {
+                    alert("Expense Updated");
+                }
+                else{
+                    alert("Action Denied");
+                }
+                console.log(response)
             })
             .catch(function (response) {
                 //handle error
@@ -89,7 +98,7 @@ class UpadteExpense extends Component{
             <form onSubmit = {this.onSubmitUpdateExpense}>
 
                             <h5>Expense Id</h5>
-                            <input class = 'input' type = 'text' name = 'expenseId' value = {expenseId} onChange = {this.onChangeUpdateExpense}/>
+                            <input class = 'input' type = 'number' name = 'expenseId' value = {expenseId} onChange = {this.onChangeUpdateExpense}/>
 
                             <br/>
                             
@@ -99,7 +108,7 @@ class UpadteExpense extends Component{
                             <br/>
 
                             <h5>Amount:</h5>
-                            <input class = 'input' type = 'text' name = 'amount' value = {amount} onChange = {this.onChangeUpdateExpense}/>
+                            <input class = 'input' type = 'number' name = 'amount' value = {amount} onChange = {this.onChangeUpdateExpense}/>
 
                             <br/>
 

@@ -57,11 +57,20 @@ class AddExpense extends Component{
             method: 'post',
             url: '/api/expense',
             data: formBody,
+            headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
+
             // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
             .then(function (response) {
                 //handle success
-                console.log(response);
+                if(localStorage.getItem("Token"))
+                {
+                    alert("Expense Created");
+                }
+                else{
+                    alert("Action Denied");
+                }
+                console.log(response)
             })
             .catch(function (response) {
                 //handle error
@@ -86,7 +95,7 @@ class AddExpense extends Component{
                             <br/>
 
                             <h5>Amount:</h5>
-                            <input class = 'input' type = 'text' name = 'amount' value = {amount} onChange = {this.onChangeAddExpense}/>
+                            <input class = 'input' type = 'number' name = 'amount' value = {amount} onChange = {this.onChangeAddExpense}/>
 
                             <br/>
 

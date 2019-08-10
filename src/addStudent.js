@@ -41,7 +41,10 @@ class AddStudent extends Component{
     onSubmitAddStudent = async(e) =>{
 
         e.preventDefault();
-
+        console.log(localStorage.getItem("Token"));
+        var config = {
+            headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
+        };
         const {studentName, fatherName, grade, contact} = this.state;
         const formBody = {studentName, fatherName, grade, contact};
         const axios = require('axios');
@@ -50,10 +53,17 @@ class AddStudent extends Component{
             method: 'post',
             url: '/api/student',
             data: formBody,
+            headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
         })
             .then(function (response) {
                 //handle success
-                alert("Student Created");
+                if(localStorage.getItem("Token"))
+                {
+                    alert("Student Created");
+                }
+                else{
+                    alert("Action Denied");
+                }
                 console.log(response);
             })
             .catch(function (response) {

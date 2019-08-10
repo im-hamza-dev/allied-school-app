@@ -19,7 +19,7 @@ body{
 }
 
 .extra{
-    width: 83%;
+    width: 88%;
     color: white;
     font-size: 23px;
     padding-left: 40px;
@@ -31,12 +31,25 @@ body{
     margin: 0px;
 }
 .user{
-    color: white;
-    font-size: 15px;
+    color: white !important;
+    font-size: 15px !important;
     float: left;
     margin: 0px;
-    padding: 0px;
-    
+    padding: 6px 20px !important;
+    font-size:12px !important;
+    font-family: 'poppins' !important;
+    background: black !important;
+    transition: 1s !important;
+}
+.user:hover{
+    color: black !important;
+    font-size: 15px !important;
+    float: left;
+    margin: 0px;
+    padding: 6px 20px !important;
+    font-size:12px !important;
+    font-family: 'poppins' !important;
+    background: white !important;
 }
 
 

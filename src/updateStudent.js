@@ -49,9 +49,17 @@ class UpdateStudent extends Component{
             method: 'put',
             url: '/api/student/'+ studentId,
             data: formBody,
+            headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
         })
             .then(function (response) {
                 //handle success
+                if(localStorage.getItem("Token"))
+                {
+                    alert("Student Updated");
+                }
+                else{
+                    alert("Action Denied");
+                }
                 console.log(response);
             })
             .catch(function (response) {
@@ -68,7 +76,7 @@ class UpdateStudent extends Component{
         return(
             <form onSubmit = {this.onSubmitUpdate}>
                              <h5>Student Id:</h5>
-                            <input class = 'input' type = 'text' name = 'studentId' value = {studentId} onChange = {this.onChange}/>
+                            <input class = 'input' type = 'number' name = 'studentId' value = {studentId} onChange = {this.onChange}/>
 
                             <br/>
 

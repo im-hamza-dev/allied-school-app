@@ -41,32 +41,44 @@ class OtherExpense extends Component{
     
     getExpenseFunction = ()=>
     {
+        var config = {
+            headers: {'Authorization': "bearer " + localStorage.getItem("Token")}
+        };
         const axios = require('axios');
-        axios.get("/api/expense")
+        axios.get("/api/expense", config)
         .then(response =>
             {
                 this.setState({totalExpense:0});
                 // console.log(response);
-                const filteredExpenseData = response.data.expenses.filter(expense =>
-                    {
-                        return (expense.month === this.state.selectedMonthExpense)&&(expense.year === this.state.selectedYearExpense);
-                    });    
-                    // console.log(filteredExpenseData);
-                const expenseData = filteredExpenseData.map(user=>
-                    {
-                        this.setState({totalExpense:this.state.totalExpense+user.amount});
-                            return (
-                                {
-                                    id: `${user.expenseId}`,
-                                    title: `${user.expenseTitle}`,
-                                    comment: `${user.comment}`,
-                                    amount: `${user.amount}`,
-                                    createdAt: `${user.createdAt}`,
-                                    updatedAt: `${user.createdAt}`,
-                                })
-                    });
+                if(localStorage.getItem("Token"))
+                {
+                
+                    const filteredExpenseData = response.data.expenses.filter(expense =>
+                        {
+                            return (expense.month === this.state.selectedMonthExpense)&&(expense.year === this.state.selectedYearExpense);
+                        });    
+                        // console.log(filteredExpenseData);
+                    const expenseData = filteredExpenseData.map(user=>
+                        {
+                            this.setState({totalExpense:this.state.totalExpense+user.amount});
+                                return (
+                                    {
+                                        id: `${user.expenseId}`,
+                                        title: `${user.expenseTitle}`,
+                                        comment: `${user.comment}`,
+                                        amount: `${user.amount}`,
+                                        createdAt: `${user.createdAt}`,
+                                        updatedAt: `${user.createdAt}`,
+                                    })
+                        });
             
-            this.setState({expenseData});
+                    this.setState({expenseData});
+                }
+                else
+                {
+                    alert(response.data.err + "   Login Please");
+                    console.log(response);
+                }
             // console.log(response);
             })
 

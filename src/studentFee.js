@@ -49,50 +49,60 @@ class StudentFee extends Component{
         }
     }
     
-
+    
     getStudentFunction = ()=>
     {
+
+        var config = {
+            headers: {'Authorization': "bearer " + localStorage.getItem("Token")}
+        };
         const axios = require('axios');
-        axios.get("/api/student")
+        axios.get("/api/student", config)
         .then(response =>
             {
-                console.log("helo");
+                console.log(localStorage.getItem("Token"));
                 this.setState({totalTransportFee:0, totalTuitionFee:0, totalFee:0});
-                const studentData = response.data.students.map(user=>
-                    {
-                        // console.log(user.fees);
-                        const filteredFees = user.fees.filter(fee =>
-                            {
-                                // console.log(this.state.selectedMonth);
-                                // console.log(fee.month);
-                            return (fee.month === this.state.selectedMonth)&&(fee.year === this.state.selectedYear);
-                            });
-                            if(filteredFees[0]){
-                                this.setState({filteredFeesArray:filteredFees[0]})
-                                this.setState({totalTransportFee: this.state.totalTransportFee+filteredFees[0].transportFee});
-                                this.setState({totalTuitionFee: this.state.totalTuitionFee+filteredFees[0].tuitionFee});
-                                this.setState({totalFee:this.state.totalFee+filteredFees[0].transportFee+filteredFees[0].tuitionFee});
-                            }
-                            else{
-                                this.setState({filteredFeesArray:{transportFee: 0, tuitionFee: 0}})
-                            }
-                            // console.log(this.state.totalTransportFee);
-                            // console.log(this.state.filteredFeesArray);
-
-                            return (
+                if(localStorage.getItem("Token"))
+                {
+                    const studentData = response.data.students.map(user=>
+                        {
+                            // console.log(user.fees);
+                            const filteredFees = user.fees.filter(fee =>
                                 {
-                                    id: `${user.studentId}`,
-                                    name: `${user.studentName}`,
-                                    fatherName: `${user.fatherName}`,
-                                    grade: `${user.grade}`,
-                                    contact: `${user.contact}`,
-                                    transportFee: `${this.state.filteredFeesArray.transportFee}`,
-                                    tuitionFee: `${this.state.filteredFeesArray.tuitionFee}`,
-                                })
-                            });
-            
-            this.setState({studentData});
-            console.log(response);
+                                    // console.log(this.state.selectedMonth);
+                                    // console.log(fee.month);
+                                return (fee.month === this.state.selectedMonth)&&(fee.year === this.state.selectedYear);
+                                });
+                                if(filteredFees[0]){
+                                    this.setState({filteredFeesArray:filteredFees[0]})
+                                    this.setState({totalTransportFee: this.state.totalTransportFee+filteredFees[0].transportFee});
+                                    this.setState({totalTuitionFee: this.state.totalTuitionFee+filteredFees[0].tuitionFee});
+                                    this.setState({totalFee:this.state.totalFee+filteredFees[0].transportFee+filteredFees[0].tuitionFee});
+                                }
+                                else{
+                                    this.setState({filteredFeesArray:{transportFee: 0, tuitionFee: 0}})
+                                }
+                                // console.log(this.state.totalTransportFee);
+                                // console.log(this.state.filteredFeesArray);
+
+                                return (
+                                    {
+                                        id: `${user.studentId}`,
+                                        name: `${user.studentName}`,
+                                        fatherName: `${user.fatherName}`,
+                                        grade: `${user.grade}`,
+                                        contact: `${user.contact}`,
+                                        transportFee: `${this.state.filteredFeesArray.transportFee}`,
+                                        tuitionFee: `${this.state.filteredFeesArray.tuitionFee}`,
+                                    })
+                        });
+                        this.setState({studentData});
+                        console.log(response);
+                }
+                else{
+                    alert(response.data.err + "   Login Please");
+                    console.log(response);
+                }
             })
 
   
@@ -117,10 +127,10 @@ class StudentFee extends Component{
         return(
             <div className = 'StudentFee'>
                 
-                <div className = 'card-stats rightSide'>
+                <div className = 'card-stats-studentFee rightSide-studentFee'>
                     <div className = 'heading'>Statistics per month:</div>
                     <hr className = 'line02'></hr>
-                    <div class='align-style'>
+                    <div class='align-style-studentFee'>
                         <div className = 'structure-style'>
                             <div className = 'stats'>Total Tution Fee:</div>
                             <div className="numbers-styling">{this.state.totalTuitionFee} Rs</div>

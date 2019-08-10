@@ -44,18 +44,31 @@ class FormDialog extends Component {
   handleCancel = () => {
     this.setState({open:false, code:''});
   }
-  handleNext = () => {
+  handleNext = (e) => {
     //request to check input-code at backend and waiting for response
     //if response is +ve then close this dialog and open another dialog to enter new password...
-    if(this.state.code === "abcd"){
-      // alert("code matched");
-      this.setState({open:false, code:'', openPassword:true})
-    }
-    else{
-      this.setState({open:false, code:''});
-      alert("Invalid Code");
-    }
-
+    e.preventDefault();
+    const {code} = this.state;
+    const formBody = {code};
+    const axios = require("axios");
+    axios({
+      method:'post',
+      url:'/api/verify-code',
+      data:formBody,
+    })
+    .then((response)=>{
+      console.log(response);
+      if(response.data.verified === true){
+        alert("code matched");
+        this.setState({open:false, openPassword:true})
+      }
+      else{
+        alert("Invalid Code");
+        this.setState({open:false, code:''});
+      }
+  
+    })
+    
   }
 
   //Dialog 01 functions...end
@@ -67,7 +80,7 @@ class FormDialog extends Component {
   }
 
   handleClosePassword = () => {
-    this.setState({openPassword:false, newPassword:''});
+    this.setState({openPassword:false, code:'',newPassword:''});
   }
 
   onChangePassword = (e) => {
@@ -77,10 +90,28 @@ class FormDialog extends Component {
     this.setState({openPassword:false, newPassword:''});
   }
 
-  handleSubmitPassword = () => {
+  handleSubmitPassword = async(e) => {
     //code to request to update password...
-    this.setState({openPassword:false, newPassword:''});
+    console.log('Im in');
+    e.preventDefault();
+    const {code, newPassword} = this.state;
+    const formBody = {code, newPassword};
+    console.log(code, newPassword);
+    const axios = require("axios");
+    await axios({
+      method:'post',
+      url:'/api/update-password',
+      data:formBody,
+    })
+    .then(function(response){
+      console.log("response");
+    })
+    .catch(function(response){
+      console.log("error");
+    })
+    this.setState({openPassword:false, code:'',newPassword:''});
     alert("Password Updated");
+    
 
 
   }
@@ -89,7 +120,7 @@ class FormDialog extends Component {
   render(){
     return (
       <div>
-        <Button  color="primary" className = "" onClick={this.handleClickOpen}>
+        <Button  color="primary"  onClick={this.handleClickOpen}>
           Forget Password
           </Button>
         <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">

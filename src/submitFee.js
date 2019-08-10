@@ -49,10 +49,19 @@ class SubmitFee extends Component{
             method: 'post',
             url: '/api/fee',
             data: formBody,
+            headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
+
         })
             .then(function (response) {
                 //handle success
-                console.log(response);
+                if(localStorage.getItem("Token"))
+                {
+                    alert(response.data.message);
+                }
+                else{
+                    alert("Action Denied");
+                }
+                console.log(response)
             })
             .catch(function (response) {
                 //handle error
@@ -77,12 +86,12 @@ class SubmitFee extends Component{
                             <br/>
                             
                             <h5>Transport Fee:</h5>
-                            <input class = 'input' type = 'text' name = 'transportFee' value = {transportFee} onChange = {this.onChangeSubmitFee}/>
+                            <input class = 'input' type = 'number' name = 'transportFee' value = {transportFee} onChange = {this.onChangeSubmitFee}/>
 
                             <br/>
 
                             <h5>Tuition Fee:</h5>
-                            <input class = 'input' type = 'text' name = 'tuitionFee' value = {tuitionFee} onChange = {this.onChangeSubmitFee}/>
+                            <input class = 'input' type = 'number' name = 'tuitionFee' value = {tuitionFee} onChange = {this.onChangeSubmitFee}/>
 
                             <br/>
 

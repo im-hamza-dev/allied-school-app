@@ -49,11 +49,20 @@ class UpdateStaff extends Component{
             method: 'put',
             url: '/api/staff/' + staffId,
             data: formBody,
+            headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
+
             // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
             .then(function (response) {
                 //handle success
-                console.log(response);
+                if(localStorage.getItem("Token"))
+                {
+                    alert("Staff Updated");
+                }
+                else{
+                    alert("Action Denied");
+                }
+                console.log(response)
             })
             .catch(function (response) {
                 //handle error
@@ -76,7 +85,7 @@ class UpdateStaff extends Component{
             <form onSubmit = {this.onSubmitUpdateStaff}>
 
                             <h5>Staff Id:</h5>
-                            <input class = 'input' type = 'text' name = 'staffId' value = {staffId} onChange = {this.onChangeUpdateStaff}/>
+                            <input class = 'input' type = 'number' name = 'staffId' value = {staffId} onChange = {this.onChangeUpdateStaff}/>
                             <br/>
 
                             <h5>Staff Name:</h5>

@@ -57,10 +57,11 @@ class Login extends Component{
             data:formBody,
         })
         .then(function(response){
-            // console.log(response.data);
+            console.log(response.data);
             if(response.data.status===200){
                 alert("Login Successful");
-                history.push("/main")
+                localStorage.setItem("Token", response.data.token);
+                history.push("/main");
             }
             else{
                 alert("Invalid Credentials");
@@ -68,11 +69,11 @@ class Login extends Component{
         })
         .catch(function (response) {
             //handle error
-            alert("Invalid Credentialsdfdf");
+            alert("Invalid Credentials");
             console.log(response);
         });
 
-        this.setState({email:'',password:''});
+        // this.setState({email:'',password:''});
 
     }
 
@@ -88,7 +89,7 @@ class Login extends Component{
                     <div className = "boundary-login">
                         <div><img class = 'logo-login' src='logoAllied.png' alt='Allied School'/></div>
                         <form onSubmit= {this.onSubmitLogin} className = "form-style">
-                            <h5>Username:</h5>
+                            <h5>Email:</h5>
                             <input class = 'input-login' type = 'text' name = 'email' value = {this.state.email} 
                             onChange = {this.handleChangeLogin}></input>
                             <br/>

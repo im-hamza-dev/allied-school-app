@@ -48,11 +48,20 @@ class AddStaff extends Component{
             method: 'post',
             url: '/api/staff',
             data: formBody,
+            headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
+
             // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
             .then(function (response) {
                 //handle success
-                console.log(response);
+                if(localStorage.getItem("Token"))
+                {
+                    alert("Staff Created");
+                }
+                else{
+                    alert("Action Denied");
+                }
+                console.log(response)
             })
             .catch(function (response) {
                 //handle error

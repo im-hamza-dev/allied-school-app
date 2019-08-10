@@ -19,8 +19,13 @@ class TotalIncome extends Component{
     }
 
     getData = async() => {
+        var config = {
+            headers: {'Authorization': "bearer " + localStorage.getItem("Token")}
+        };
+        if(localStorage.getItem("Token"))
+        {
         const axios = require('axios');
-        await axios.get("/api/student/")
+        await axios.get("/api/student/", config)
         .then(response =>
             {
                 this.setState({totalIncomingFee:0});
@@ -42,7 +47,7 @@ class TotalIncome extends Component{
                     return ({});
                 })
             })
-        await axios.get("/api/expense")
+        await axios.get("/api/expense", config)
         .then(response =>
             {
                 this.setState({totalExpensePaid:0});
@@ -62,7 +67,7 @@ class TotalIncome extends Component{
                         return({});
                     })
             })
-        await axios.get("/api/staff")
+        await axios.get("/api/staff", config)
         .then(response =>
             {
                 this.setState({totalSalaryPaid:0});
@@ -86,6 +91,10 @@ class TotalIncome extends Component{
             })
             // this.setState({totalIncome:0});
             this.setState({totalIncome:this.state.totalIncomingFee - (this.state.totalExpensePaid + this.state.totalSalaryPaid)});
+        }
+        else{
+            alert("Authentication Failed!  Login Please.");
+        }
     }
     componentDidMount = () => {
         this.getData();

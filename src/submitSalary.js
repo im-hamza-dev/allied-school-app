@@ -49,11 +49,20 @@ class SubmitSalary extends Component{
             method: 'post',
             url: '/api/salary',
             data: formBody,
+            headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
+
             // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
             .then(function (response) {
                 //handle success
-                console.log(response);
+                if(localStorage.getItem("Token"))
+                {
+                    alert(response.data.message);
+                }
+                else{
+                    alert("Action Denied");
+                }
+                console.log(response)
             })
             .catch(function (response) {
                 //handle error
@@ -79,7 +88,7 @@ class SubmitSalary extends Component{
                             <br/>
 
                             <h5>Salary:</h5>
-                            <input class = 'input' type = 'text' name = 'salary' value = {salary} onChange = {this.onChangeSalary}/>
+                            <input class = 'input' type = 'number' name = 'salary' value = {salary} onChange = {this.onChangeSalary}/>
                             <br/>
                             
                             <h5>Month:</h5>
