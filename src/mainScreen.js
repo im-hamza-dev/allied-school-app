@@ -2,26 +2,29 @@ import React, {Component} from 'react';
 import './mainScreen.css';
 import './tabs'
 import SimpleTabs from './tabs';
+import Button from '@material-ui/core/Button';
+
 class Main extends Component{
-    constructor(props){
-        super(props);
+
+    onClickLogout = () => {
+        const {history} = this.props;
+        localStorage.removeItem("Token");
+        console.log(localStorage.getItem("Token"));
+        history.push("/");
     }
+
     
-     
+    // onClick = {history.push("/")}
     render(){ 
         return(
             <div className = 'fullScreen'>
-                
                 <div class = 'left'>
                     <div className = 'extra'>Allied School</div>
-                    <div className = 'user'>User Name</div>
-                    <img class = 'admin' src='admin.png' alt='Admin'/>
-                   
+                    <Button className = 'user' onClick = {this.onClickLogout}>Logout</Button>
                 </div>
-                <div class = 'right'>
+                <div className = 'right'>
                     <SimpleTabs/>
-                </div>
-                
+                </div>     
             </div>
         );
     }

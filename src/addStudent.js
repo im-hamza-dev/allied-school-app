@@ -4,6 +4,8 @@ import './tabs'
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import { delay, async } from 'q';
+import {Alert} from 'reactstrap'
+import AlterDialog from './alertForm';
 
 
 const MyButton = styled(Button)({
@@ -35,39 +37,43 @@ class AddStudent extends Component{
     onChangeAddStudent = (e)=>{
         this.setState({[e.target.name]:e.target.value});
     }
-    sleep = (milliseconds) => {
-        var start = new Date().getTime();
-        for (var i = 0; i < 1e7; i++) {
-          if ((new Date().getTime() - start) > milliseconds){
-            break;
-          }
-        }
-      }
 
     onSubmitAddStudent = async(e) =>{
 
         e.preventDefault();
-
+        console.log(localStorage.getItem("Token"));
+        var config = {
+            headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
+        };
         const {studentName, fatherName, grade, contact} = this.state;
         const formBody = {studentName, fatherName, grade, contact};
         const axios = require('axios');
 
         await axios({
             method: 'post',
-            url: '/api/student',
+            url: 'https://allied-school-api.herokuapp.com/api/student',
             data: formBody,
-            // config: { headers: {'Content-Type': 'multipart/form-data' }}
+            headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
         })
             .then(function (response) {
                 //handle success
+                if(localStorage.getItem("Token"))
+                {
+                    alert("Student Created");
+                }
+                else{
+                    alert("Action Denied");
+                }
                 console.log(response);
             })
             .catch(function (response) {
                 //handle error
+                alert("Request Failed");
                 console.log(response);
             });
            
             this.props.trigger03();
+            this.setState({studentName:'', fatherName:'', contact:'', grade:''});
 
 
     }

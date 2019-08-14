@@ -47,12 +47,19 @@ class UpdateStudent extends Component{
 
         await axios({
             method: 'put',
-            url: '/api/student/'+ studentId,
+            url: 'https://allied-school-api.herokuapp.com/api/student/'+ studentId,
             data: formBody,
-            // config: { headers: {'Content-Type': 'multipart/form-data' }}
+            headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
         })
             .then(function (response) {
                 //handle success
+                if(localStorage.getItem("Token"))
+                {
+                    alert("Student Updated");
+                }
+                else{
+                    alert("Action Denied");
+                }
                 console.log(response);
             })
             .catch(function (response) {
@@ -61,17 +68,15 @@ class UpdateStudent extends Component{
             });
 
             this.props.trigger03();
-
-
+            this.setState({studentId:'', studentName:'', fatherName:'', grade:'', contact:''});
     }
     
-     
     render(){ 
         const {studentId, studentName, fatherName, grade, contact} = this.state;
         return(
             <form onSubmit = {this.onSubmitUpdate}>
                              <h5>Student Id:</h5>
-                            <input class = 'input' type = 'text' name = 'studentId' value = {studentId} onChange = {this.onChange}/>
+                            <input class = 'input' type = 'number' name = 'studentId' value = {studentId} onChange = {this.onChange}/>
 
                             <br/>
 

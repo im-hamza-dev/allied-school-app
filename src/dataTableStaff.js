@@ -7,50 +7,44 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 
-class DataTable extends React.Component {
+class DataTableStaff extends React.Component {
   constructor(props){
     super(props);
     this.state={
 
     }
 }
-  componentDidMount = ()=>{
-      this.props.trigger01();   
 
+  componentDidMount = ()=>{
+      this.props.trigger01Staff(); 
   }
 render(){
-    const {trigger03} = this.props;
+    const {trigger03Staff} = this.props;
     // console.log(this.props.monthProp);
   return (
-
     <Paper className='paperDesign'>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Student Id</TableCell>
-            <TableCell >Student Name</TableCell>
-            <TableCell >Father Name</TableCell>
-            <TableCell >Grade</TableCell>
+            <TableCell>Staff Id</TableCell>
+            <TableCell >Staff Name</TableCell>
+            <TableCell >Position</TableCell>
             <TableCell >Contact</TableCell>
-            <TableCell>Transport Fee</TableCell>
-            <TableCell>Tuition Fee</TableCell>
-
+            <TableCell>Salary</TableCell>
           </TableRow>
         </TableHead>
-        {trigger03 && <TableBody>
-          {trigger03.map(user => {
-              const {id,name,fatherName,grade,contact,transportFee,tuitionFee} = user;
+        {trigger03Staff && <TableBody>
+          {trigger03Staff.map(user => {
+              const {staffId,staffName,position,contact,salary} = user;
               return(
-                <TableRow key={id}>
+                <TableRow key={staffId}>
                 <TableCell component="th" scope="row">
-                    {id}
+                    {staffId}
                 </TableCell>
-                <TableCell >{name}</TableCell>
-                <TableCell>{fatherName}</TableCell>
-                <TableCell>{grade}</TableCell>
+                <TableCell >{staffName}</TableCell>
+                <TableCell>{position}</TableCell>
                 <TableCell>{contact}</TableCell>
-                <TableCell>{transportFee}</TableCell>
-                <TableCell>{tuitionFee}</TableCell>
+                <TableCell>{salary}</TableCell>
                 </TableRow>
               );
             })}
@@ -61,4 +55,4 @@ render(){
 }
 }
 
-export default DataTable;
+export default DataTableStaff;

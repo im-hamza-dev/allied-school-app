@@ -3,7 +3,7 @@ import './mainScreen.css';
 import './tabs'
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
-import { async } from 'q';
+import { delay, async } from 'q';
 
 
 const MyButton = styled(Button)({
@@ -21,42 +21,52 @@ const MyButton = styled(Button)({
   });
 
 
-class SubmitFee extends Component{
+class UpadteExpense extends Component{
     constructor(props){
         super(props);
         this.state={
-            studentId:'',
-            transportFee:'',
-            tuitionFee:'',
+            expenseId:'',
+            expenseTitle:'',
+            comment:'',
+            amount:'',
             month:'Jan',
             year:'',
             }
     }
 
-    onChangeSubmitFee = (e)=>{
+    onChangeUpdateExpense = (e)=>{
         this.setState({[e.target.name]:e.target.value});
     }
+    // sleep = (milliseconds) => {
+    //     var start = new Date().getTime();
+    //     for (var i = 0; i < 1e7; i++) {
+    //       if ((new Date().getTime() - start) > milliseconds){
+    //         break;
+    //       }
+    //     }
+    //   }
 
-    onSubmitsubmitFee = async(e) =>{
+    onSubmitUpdateExpense = async(e) =>{
 
         e.preventDefault();
 
-        const {studentId, transportFee, tuitionFee, month, year} = this.state;
-        const formBody = {transportFee, tuitionFee, month, year, studentId};
+        const {expenseId, expenseTitle, comment, amount, month, year} = this.state;
+        const formBody = {expenseTitle, amount, comment, month, year};
         const axios = require('axios');
 
         await axios({
-            method: 'post',
-            url: 'https://allied-school-api.herokuapp.com/api/fee',
+            method: 'put',
+            url: 'https://allied-school-api.herokuapp.com/api/expense/'+ expenseId,
             data: formBody,
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
 
+            // config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
             .then(function (response) {
                 //handle success
                 if(localStorage.getItem("Token"))
                 {
-                    alert(response.data.message);
+                    alert("Expense Updated");
                 }
                 else{
                     alert("Action Denied");
@@ -67,36 +77,47 @@ class SubmitFee extends Component{
                 //handle error
                 console.log(response);
             });
-
-            this.props.trigger03();
-            this.setState({studentId:'', transportFee:'', tuitionFee:'', month:'Jan', year:''});
+           
+            this.props.trigger03Expense();
+            this.setState({
+                expenseId:'',
+                expenseTitle:'',
+                comment:'',
+                amount:'',
+                month:'Jan',
+                year:'',
+                })
 
 
     }
     
      
     render(){ 
-        const {studentId, transportFee, tuitionFee, month, year} = this.state;
+        const {expenseId, expenseTitle, comment, amount, month, year} = this.state;
         return(
-            <form onSubmit = {this.onSubmitsubmitFee}>
+            <form onSubmit = {this.onSubmitUpdateExpense}>
 
-                            <h5>Student Id:</h5>
-                            <input class = 'input' type = 'text' name = 'studentId' value = {studentId} onChange = {this.onChangeSubmitFee}/>
+                            <h5>Expense Id</h5>
+                            <input class = 'input' type = 'number' name = 'expenseId' value = {expenseId} onChange = {this.onChangeUpdateExpense}/>
 
                             <br/>
                             
-                            <h5>Transport Fee:</h5>
-                            <input class = 'input' type = 'number' name = 'transportFee' value = {transportFee} onChange = {this.onChangeSubmitFee}/>
+                            <h5>Title:</h5>
+                            <input class = 'input' type = 'text' name = 'expenseTitle' value = {expenseTitle} onChange = {this.onChangeUpdateExpense}/>
 
                             <br/>
 
-                            <h5>Tuition Fee:</h5>
-                            <input class = 'input' type = 'number' name = 'tuitionFee' value = {tuitionFee} onChange = {this.onChangeSubmitFee}/>
+                            <h5>Amount:</h5>
+                            <input class = 'input' type = 'number' name = 'amount' value = {amount} onChange = {this.onChangeUpdateExpense}/>
 
+                            <br/>
+
+                            <h5>Comment:</h5>
+                            <input class = 'input' type = 'text' name = 'comment' value = {comment} onChange = {this.onChangeUpdateExpense}/>
                             <br/>
 
                             <h5>Month:</h5>
-                            <select className = "input" name = "month" value = {month} onChange={this.onChangeSubmitFee}>
+                            <select className = "input" name = "month" value = {month} onChange={this.onChangeUpdateExpense}>
                             <option value = "Jan">Jan</option>
                             <option value = "Feb">Feb</option>
                             <option value = "Mar">Mar</option>
@@ -112,12 +133,14 @@ class SubmitFee extends Component{
                             </select>
                             <br/>
 
+
                             <h5>Year:</h5>
-                            <input class = 'input' type = 'text' name = 'year' value = {year} onChange = {this.onChangeSubmitFee}/>
+                            <input class = 'input' type = 'text' name = 'year' value = {year} onChange = {this.onChangeUpdateExpense}/>
                             <br/>
-                            <MyButton className = 'button' type="submit">Submit</MyButton>
+                            
+                            <MyButton className = 'button' type="submit">Update</MyButton>
                         </form>
         );
     }
 }
-export default SubmitFee;
+export default UpadteExpense;

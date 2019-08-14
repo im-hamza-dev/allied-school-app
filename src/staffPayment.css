@@ -1,82 +1,146 @@
-.StudentFee{
+.menuRow-staff{
+    width:87%;
+    margin-left: 80px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-family: 'poppins';
+    color: rgb(153, 148, 153);
+    display:inline-block;
+}
+.StaffPayment{
     width:100%;
-    height: 150vh;
+    height: auto !important;
+    display: block;
+    /* min-height: 100vh !important; */
+    margin: 0px !important;
+    background: rgb(245, 245, 245);
+    padding-top: 40px; 
 }
 
-.table{
-    width: 80%;
-    float: left;
+.table-staff{
+    width: 85% !important;
+    padding:5px !important;
+    margin-bottom: 60px;
+    margin-left: 80px;
+    border:1px solid grey;
+    transition: 0.5s;
+    border-radius: 5px;
+    background: white;
+    /* margin-left:30px !important;
+    margin-right:auto !important; */
 }
-.rightSide{
-    /* height: 66vh; */
-    width: 20%;
-    padding-top: 70px;
-    float:left;
+.table-staff:hover{
+    transform: translate(0px,2px);
+    box-shadow: 0px 0px 10px rgb(197, 197, 197);
+    padding:7px !important;
+    background-color: rgb(248, 248, 248);
+
 
 }
+.rightSide-staff{
+    width: 83% !important;
+    /* margin:auto !important; */
+    padding:20px !important;
+    margin-bottom: 40px;
+    margin-left:80px;
 
-.card{
+    
+}
+
+/* .card{
     background-color: white;
     margin-left: 5px;
+    margin-top: 0px !important;
     border-radius: 6px;
     box-shadow: 0px 0px 20px lightgray;
     padding: 20px;
     font-family: 'poppins';
     color: #B5B4B6;
 
+} */
+.card-stats-staff{
+    background-color: white;
+    font-family: 'poppins';
+    color: #B5B4B6;
+    border-radius: 4px;
+    border: 1px solid grey !important;
+    transition: 0.5s !important;
+    display: block !important;
+    clear: left !important;
+}
+.card-stats-staff:hover{
+    box-shadow: 0px 0px 10px rgb(197, 197, 197);
+    transform: translate(0px,2px);
+}
+.card-design-staff{
+    background-color: white;
+    margin-left: 5px;
+    margin-top: 0px !important;
+    border-radius: 6px;
+    /* box-shadow: 0px 0px 20px lightgray; */
+    padding: 20px;
+    font-family: 'poppins';
+    color: #B5B4B6;
+    border:1px solid grey;
+    transition: 0.5s !important;
+}
+.card-design-staff:hover{
+    box-shadow: 0px 0px 10px rgb(197, 197, 197);
+    transform: translate(0px,4px);
 }
 
-.padLeft{
-    padding-left: 95px;
-    padding-top: 0px;
+.padLeft-staff{
+    padding-left:  95px;
+    margin-bottom: 10px;
+    margin-top: 0px !important;
+
 }
-.stats{
+.stats-staff{
     padding-top: 20px;
     font-weight: bold;
-    color: #EB9FFA;
+    color: grey !important;
 }
 
-.buttonChanging{
+.buttonChanging-staff{
     
     background: black;
 }
 
-.buttonAdjust{
+.buttonAdjust-staff{
     margin-left: 5px;
     margin-bottom: 10px;
 }
 
-.bottomButton{
+.bottomButton-staff{
     margin-left: 55px;
 }
 
-.top{
+.top-staff{
     height: 70vh;
 }
-.bottom{
-    margin-top: 100px;
-    height: 30vh;
-}
 
-.heading{
+.heading-staff{
     font-weight: 600;
+    text-align: left;
 }
 
-.forms{
+.forms-staff{
     float: left;
     width: 25%;
     margin-left: 15px;
 }
 
-.leftMostForm{
+.leftMostForm-staff{
     margin-left: 80px;
 }
 
 h5{
     margin:0px;
     font-weight: normal;
+    color:grey;
+    /* margin-left: 38px !important; */
 }
-.loginButton{
+.loginButton-staff{
     color: white;
     padding-left: 20px;
     padding-right: 20px;
@@ -87,29 +151,121 @@ h5{
     border-radius: 5px;
 }
 
-.input{
-    width: 50%;
+.input-staff{
     margin-bottom: 10px;
-    color: grey;
+    border-radius: 7px;
+    padding: 10px;
+    color: rgb(160, 160, 160) !important;
+    border: 1px solid grey !important;
+    width: 80% !important;
+    /* margin-left: 38px !important; */
+
 }
 
-.line{
-    opacity: 0.4;
+.line-staff{
+    opacity: 1 !important;
     margin-bottom: 30px;
 }
 
-.line02{
-    opacity: 0.4;
-    margin-bottom: 20px;
+.line02-staff{
+    opacity: 1 !important;
+    
+    margin-bottom: 0px !important;
 }
 
 
-.heading{
+.heading-staff{
     font-weight: 600;
+    color:grey;
 }
-.button{
+.button-staff{
     margin-top: 20px;
 }
-.extraCard{
+.extraCard-staff{
     padding-bottom: 40px;
+}
+.monthMenu-staff{
+    padding: 10px;
+    font-weight: bold;
+    font-family: 'poppins';
+    color: grey;
+    background-color: white;
+    /* box-shadow: 0px 0px 10px lightgray; */
+    border: none;
+    border-radius: 5px;
+    margin-left: 20px;
+    border: 1px solid grey;
+    transition:0.4s;
+}
+.monthMenu-staff:hover{
+    box-shadow: 0px 0px 20px rgb(197, 197, 197);
+    transform: translate(0px,-3px);
+    background: grey;
+    color:white;
+}
+.label-style-staff{
+    float: left;
+    display: inline;
+    
+}
+.align-style-select-row-staff{
+    margin-left: 20px;
+}
+.structure-style-staff{
+    float: left;
+    display:inline;
+    width:30%;
+}
+.align-style-staff{
+    text-align: center !important;
+    margin-left: 40px;
+    display: inline-block !important;
+    width: 100%;
+}
+.numbers-styling-staff{
+    color:rgb(250, 48, 48);
+    font-size: 25px;
+}
+
+.stats-align-style-staff{
+    width: 100% !important;
+    margin-bottom: 40px !important;
+    background: black;
+    padding: 10px;
+
+}
+.student-data-heading-staff{
+    width:70%;
+    font-size: 25px;
+    color:grey;
+}
+.label-font-staff{
+    color:grey;
+}
+.notes-style-staff{
+    font-size:15px;
+    padding-left: 20px;
+    font-weight:300;
+}
+.button-staff{
+    background: black !important;
+}
+.button-staff:hover{
+    background: red !important;
+    border-radius: 4px;
+}
+.form-heading-style-staff{
+    color: grey;
+    font-weight: 700;
+    margin-left: 100px;
+    width: 80% !important;
+    margin-bottom: 20px;
+    font-size: 25px;
+    font-family: 'poppins';
+}
+.form-row-staff{
+    padding-bottom: 80px !important;
+    /* padding-bottom: 100px; */
+    width: 100%;
+    display: flex;
 }
