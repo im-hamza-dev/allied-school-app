@@ -46,7 +46,7 @@ class AddStaff extends Component{
 
         await axios({
             method: 'post',
-            url: '/api/staff',
+            url: 'https://allied-school-api.herokuapp.com/api/staff',
             data: formBody,
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
 

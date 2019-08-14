@@ -56,7 +56,7 @@ class UpadteExpense extends Component{
 
         await axios({
             method: 'put',
-            url: '/api/expense/'+ expenseId,
+            url: 'https://allied-school-api.herokuapp.com/api/expense/'+ expenseId,
             data: formBody,
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
 

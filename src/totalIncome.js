@@ -25,7 +25,7 @@ class TotalIncome extends Component{
         if(localStorage.getItem("Token"))
         {
         const axios = require('axios');
-        await axios.get("/api/student/", config)
+        await axios.get("https://allied-school-api.herokuapp.com/api/student/", config)
         .then(response =>
             {
                 this.setState({totalIncomingFee:0});
@@ -47,7 +47,7 @@ class TotalIncome extends Component{
                     return ({});
                 })
             })
-        await axios.get("/api/expense", config)
+        await axios.get("https://allied-school-api.herokuapp.com/api/expense", config)
         .then(response =>
             {
                 this.setState({totalExpensePaid:0});
@@ -67,7 +67,7 @@ class TotalIncome extends Component{
                         return({});
                     })
             })
-        await axios.get("/api/staff", config)
+        await axios.get("https://allied-school-api.herokuapp.com/api/staff", config)
         .then(response =>
             {
                 this.setState({totalSalaryPaid:0});

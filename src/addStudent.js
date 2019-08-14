@@ -51,7 +51,7 @@ class AddStudent extends Component{
 
         await axios({
             method: 'post',
-            url: '/api/student',
+            url: 'https://allied-school-api.herokuapp.com/api/student',
             data: formBody,
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
         })

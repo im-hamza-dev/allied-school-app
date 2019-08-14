@@ -47,7 +47,7 @@ class SubmitFee extends Component{
 
         await axios({
             method: 'post',
-            url: '/api/fee',
+            url: 'https://allied-school-api.herokuapp.com/api/fee',
             data: formBody,
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
 

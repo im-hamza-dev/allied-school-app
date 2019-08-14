@@ -45,7 +45,7 @@ class OtherExpense extends Component{
             headers: {'Authorization': "bearer " + localStorage.getItem("Token")}
         };
         const axios = require('axios');
-        axios.get("/api/expense", config)
+        axios.get("https://allied-school-api.herokuapp.com/api/expense", config)
         .then(response =>
             {
                 this.setState({totalExpense:0});

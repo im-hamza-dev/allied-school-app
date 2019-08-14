@@ -55,7 +55,7 @@ class AddExpense extends Component{
 
         await axios({
             method: 'post',
-            url: '/api/expense',
+            url: 'https://allied-school-api.herokuapp.com/api/expense',
             data: formBody,
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
 

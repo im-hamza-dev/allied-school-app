@@ -47,7 +47,7 @@ class SubmitSalary extends Component{
 
         await axios({
             method: 'post',
-            url: '/api/salary',
+            url: 'https://allied-school-api.herokuapp.com/api/salary',
             data: formBody,
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
 

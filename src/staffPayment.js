@@ -48,7 +48,7 @@ class StaffPayment extends Component{
         };
         console.log("helo friends i'm in");
         const axios = require('axios');
-        axios.get("/api/staff", config)
+        axios.get("https://allied-school-api.herokuapp.com/api/staff", config)
         .then(response =>
             {
                 console.log("i'm in to response")

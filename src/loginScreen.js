@@ -53,7 +53,7 @@ class Login extends Component{
         const axios = require('axios');
         await axios({
             method:'post',
-            url:'/api/login',
+            url:'https://allied-school-api.herokuapp.com/api/login',
             data:formBody,
         })
         .then(function(response){

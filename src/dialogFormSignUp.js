@@ -27,10 +27,12 @@ class FormDialog extends Component {
     const axios = require('axios');
     await axios({
         method:'post',
-        url:'/api/forgot-password',
+        url:'https://allied-school-api.herokuapp.com/api/forgot-password',
         // data:formBody,
     })
-
+    .then(function(response){
+      console.log(response);
+    })
     //code to request sending email from backend...
   }
 
@@ -53,7 +55,7 @@ class FormDialog extends Component {
     const axios = require("axios");
     axios({
       method:'post',
-      url:'/api/verify-code',
+      url:'https://allied-school-api.herokuapp.com/api/verify-code',
       data:formBody,
     })
     .then((response)=>{
@@ -100,7 +102,7 @@ class FormDialog extends Component {
     const axios = require("axios");
     await axios({
       method:'post',
-      url:'/api/update-password',
+      url:'https://allied-school-api.herokuapp.com/api/update-password',
       data:formBody,
     })
     .then(function(response){
