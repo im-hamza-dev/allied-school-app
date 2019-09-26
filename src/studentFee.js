@@ -10,6 +10,8 @@ import AddStudent from './addStudent';
 import UpdateStudent from './updateStudent';
 import SubmitFee from './submitFee';
 import { async } from 'q';
+import baseURL from './instance';
+
 
   
 const MyButton = styled(Button)({
@@ -33,6 +35,7 @@ class StudentFee extends Component{
         super(props);
         this.state={
         studentId:'',
+        alliedId:'',
         studentName:'',
         fatherName:'',
         contact:'',
@@ -46,6 +49,8 @@ class StudentFee extends Component{
         totalTransportFee:0,
         totalTuitionFee:0,
         totalFee:0,
+        // amountPaid:0,
+        // amountDue:0,
         }
     }
     
@@ -57,20 +62,30 @@ class StudentFee extends Component{
             headers: {'Authorization': "bearer " + localStorage.getItem("Token")}
         };
         const axios = require('axios');
-        axios.get("https://allied-school-api.herokuapp.com/api/student", config)
+        axios.get(baseURL+"/api/student", config)
         .then(response =>
             {
-                console.log(localStorage.getItem("Token"));
+                // console.log(response);
+                // console.log(localStorage.getItem("Token"));
                 this.setState({totalTransportFee:0, totalTuitionFee:0, totalFee:0});
                 if(localStorage.getItem("Token"))
                 {
                     const studentData = response.data.students.map(user=>
                         {
+                            let totalDue = 0;
+                            let amountDue = 0;
+                            //for amount due to show on monthly basis...
+                            let amountDueMonthly = 0;
                             // console.log(user.fees);
+                            user.fees.map(feeDue =>
+                                {
+                                    amountDue = (feeDue.transportFee + feeDue.tuitionFee) - feeDue.paidAmount;
+                                    totalDue += amountDue;
+                                })
                             const filteredFees = user.fees.filter(fee =>
                                 {
                                     // console.log(this.state.selectedMonth);
-                                    // console.log(fee.month);
+                                  // console.log(fee.month);
                                 return (fee.month === this.state.selectedMonth)&&(fee.year === this.state.selectedYear);
                                 });
                                 if(filteredFees[0]){
@@ -78,9 +93,10 @@ class StudentFee extends Component{
                                     this.setState({totalTransportFee: this.state.totalTransportFee+filteredFees[0].transportFee});
                                     this.setState({totalTuitionFee: this.state.totalTuitionFee+filteredFees[0].tuitionFee});
                                     this.setState({totalFee:this.state.totalFee+filteredFees[0].transportFee+filteredFees[0].tuitionFee});
+                                    amountDueMonthly = (filteredFees[0].transportFee + filteredFees[0].tuitionFee) - filteredFees[0].paidAmount;
                                 }
                                 else{
-                                    this.setState({filteredFeesArray:{transportFee: 0, tuitionFee: 0}})
+                                    this.setState({filteredFeesArray:{transportFee: 0, tuitionFee: 0, paidAmount: 0.0}})
                                 }
                                 // console.log(this.state.totalTransportFee);
                                 // console.log(this.state.filteredFeesArray);
@@ -88,20 +104,24 @@ class StudentFee extends Component{
                                 return (
                                     {
                                         id: `${user.studentId}`,
+                                        alliedId:`${user.alliedId}`,
                                         name: `${user.studentName}`,
                                         fatherName: `${user.fatherName}`,
                                         grade: `${user.grade}`,
                                         contact: `${user.contact}`,
                                         transportFee: `${this.state.filteredFeesArray.transportFee}`,
                                         tuitionFee: `${this.state.filteredFeesArray.tuitionFee}`,
+                                        paidAmount: `${this.state.filteredFeesArray.paidAmount}`,
+                                        amountDueMonthly: amountDueMonthly,
+                                        totalDue: totalDue,
                                     })
                         });
                         this.setState({studentData});
-                        console.log(response);
+                        // console.log(response);
                 }
                 else{
                     alert(response.data.err + "   Login Please");
-                    console.log(response);
+                    // console.log(response);
                 }
             })
 

@@ -4,6 +4,8 @@ import './tabs'
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import { async } from 'q';
+import './instance';
+import baseURL from './instance';
 
 
 const MyButton = styled(Button)({
@@ -28,6 +30,7 @@ class SubmitFee extends Component{
             studentId:'',
             transportFee:'',
             tuitionFee:'',
+            paidAmount:0.0,
             month:'Jan',
             year:'',
             }
@@ -36,18 +39,20 @@ class SubmitFee extends Component{
     onChangeSubmitFee = (e)=>{
         this.setState({[e.target.name]:e.target.value});
     }
-
+    onChangeSubmitFeeAmountPaid = (e) =>{
+        this.setState({[e.target.name]: e.target.value});   
+    }
     onSubmitsubmitFee = async(e) =>{
 
         e.preventDefault();
 
-        const {studentId, transportFee, tuitionFee, month, year} = this.state;
-        const formBody = {transportFee, tuitionFee, month, year, studentId};
+        const {studentId, transportFee, tuitionFee, paidAmount, month, year} = this.state;
+        const formBody = {transportFee, tuitionFee, paidAmount, month, year, studentId};
         const axios = require('axios');
 
         await axios({
             method: 'post',
-            url: 'https://allied-school-api.herokuapp.com/api/fee',
+            url: baseURL+ '/api/fee',
             data: formBody,
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
 
@@ -61,22 +66,22 @@ class SubmitFee extends Component{
                 else{
                     alert("Action Denied");
                 }
-                console.log(response)
+                // console.log(response)
             })
             .catch(function (response) {
                 //handle error
-                console.log(response);
+                // console.log(response);
             });
 
             this.props.trigger03();
-            this.setState({studentId:'', transportFee:'', tuitionFee:'', month:'Jan', year:''});
+            this.setState({studentId:'', transportFee:'', tuitionFee:'',paidAmount:'', month:'Jan', year:''});
 
 
     }
     
      
     render(){ 
-        const {studentId, transportFee, tuitionFee, month, year} = this.state;
+        const {studentId, transportFee, tuitionFee, paidAmount, month, year} = this.state;
         return(
             <form onSubmit = {this.onSubmitsubmitFee}>
 
@@ -92,6 +97,11 @@ class SubmitFee extends Component{
 
                             <h5>Tuition Fee:</h5>
                             <input class = 'input' type = 'number' name = 'tuitionFee' value = {tuitionFee} onChange = {this.onChangeSubmitFee}/>
+
+                            <br/>
+
+                            <h5>Amount Paid:</h5>
+                            <input class = 'input' type = 'number' name = 'paidAmount' value = {paidAmount} onChange = {this.onChangeSubmitFeeAmountPaid}/>
 
                             <br/>
 

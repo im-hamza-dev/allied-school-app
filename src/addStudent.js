@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import { delay, async } from 'q';
 import {Alert} from 'reactstrap'
 import AlterDialog from './alertForm';
+import baseURL from './instance';
 
 
 const MyButton = styled(Button)({
@@ -31,6 +32,7 @@ class AddStudent extends Component{
             fatherName:'',
             contact:'',
             grade:'',
+            alliedId:'',
             }
     }
 
@@ -45,13 +47,13 @@ class AddStudent extends Component{
         var config = {
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
         };
-        const {studentName, fatherName, grade, contact} = this.state;
-        const formBody = {studentName, fatherName, grade, contact};
+        const {studentName, fatherName, grade, contact, alliedId} = this.state;
+        const formBody = {alliedId, studentName, fatherName, grade, contact};
         const axios = require('axios');
 
         await axios({
             method: 'post',
-            url: 'https://allied-school-api.herokuapp.com/api/student',
+            url: baseURL+'/api/student',
             data: formBody,
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
         })
@@ -73,19 +75,24 @@ class AddStudent extends Component{
             });
            
             this.props.trigger03();
-            this.setState({studentName:'', fatherName:'', contact:'', grade:''});
+            this.setState({studentName:'', fatherName:'', contact:'', grade:'', alliedId:''});
 
 
     }
     
      
     render(){ 
-        const {studentName, fatherName, grade, contact} = this.state;
+        const {alliedId, studentName, fatherName, grade, contact} = this.state;
         return(
             <form onSubmit = {this.onSubmitAddStudent}>
 
                             <h5>Student Name:</h5>
                             <input class = 'input' type = 'text' name = 'studentName' value = {studentName} onChange = {this.onChangeAddStudent}/>
+
+                            <br/>
+
+                            <h5>Allied Id:</h5>
+                            <input class = 'input' type = 'text' name = 'alliedId' value = {alliedId} onChange = {this.onChangeAddStudent}/>
 
                             <br/>
                             

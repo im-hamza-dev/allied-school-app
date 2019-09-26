@@ -4,6 +4,7 @@ import './tabs'
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import { delay, async } from 'q';
+import baseURL from './instance';
 
 
 const MyButton = styled(Button)({
@@ -26,6 +27,7 @@ class AddStaff extends Component{
         super(props);
         this.state={
             staffName:'',
+            alliedId:'',
             position:'',
             contact:'',
             }
@@ -40,13 +42,13 @@ class AddStaff extends Component{
  
         e.preventDefault();
 
-        const {staffName, position, contact} = this.state;
-        const formBody = {staffName, position, contact};
+        const {alliedId, staffName, position, contact} = this.state;
+        const formBody = {alliedId, staffName, position, contact};
         const axios = require('axios');
 
         await axios({
             method: 'post',
-            url: 'https://allied-school-api.herokuapp.com/api/staff',
+            url: baseURL+'/api/staff',
             data: formBody,
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
 
@@ -69,16 +71,21 @@ class AddStaff extends Component{
             });
            
             this.props.trigger03Staff();
-            this.setState({staffName:'', position:'', contact:''});
+            this.setState({alliedId:'', staffName:'', position:'', contact:''});
 
 
     }
     
      
     render(){ 
-        const {staffName, position, contact} = this.state;
+        const {alliedId, staffName, position, contact} = this.state;
         return(
             <form onSubmit = {this.onSubmitAddStaff}>
+
+                            <h5>Allied Id:</h5>
+                            <input class = 'input' type = 'text' name = 'alliedId' value = {alliedId} onChange = {this.onChangeAddStaff}/>
+
+                            <br/>
 
                             <h5>Staff Name:</h5>
                             <input class = 'input' type = 'text' name = 'staffName' value = {staffName} onChange = {this.onChangeAddStaff}/>

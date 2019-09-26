@@ -4,6 +4,7 @@ import './tabs'
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import { delay, async } from 'q';
+import baseURL from './instance';
 
 
 const MyButton = styled(Button)({
@@ -26,6 +27,7 @@ class UpdateStaff extends Component{
         super(props);
         this.state={
             staffId:'',
+            alliedId:'',
             staffName:'',
             position:'',
             contact:'',
@@ -41,13 +43,13 @@ class UpdateStaff extends Component{
 
         e.preventDefault();
 
-        const {staffId, staffName, position, contact} = this.state;
-        const formBody = {staffName, position, contact};
+        const {staffId, alliedId, staffName, position, contact} = this.state;
+        const formBody = {alliedId, staffName, position, contact};
         const axios = require('axios');
 
         await axios({
             method: 'put',
-            url: 'https://allied-school-api.herokuapp.com/api/staff/' + staffId,
+            url: baseURL+'/api/staff/' + staffId,
             data: formBody,
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
 
@@ -71,6 +73,7 @@ class UpdateStaff extends Component{
            
             this.props.trigger03Staff();
             this.setState({staffId:'',
+            alliedId:'',
             staffName:'',
             position:'',
             contact:'',});
@@ -80,12 +83,16 @@ class UpdateStaff extends Component{
     
      
     render(){
-        const {staffId, staffName, position, contact} = this.state;
+        const {staffId, alliedId, staffName, position, contact} = this.state;
         return(
             <form onSubmit = {this.onSubmitUpdateStaff}>
 
                             <h5>Staff Id:</h5>
                             <input class = 'input' type = 'number' name = 'staffId' value = {staffId} onChange = {this.onChangeUpdateStaff}/>
+                            <br/>
+
+                            <h5>Allied Id:</h5>
+                            <input class = 'input' type = 'text' name = 'alliedId' value = {alliedId} onChange = {this.onChangeUpdateStaff}/>
                             <br/>
 
                             <h5>Staff Name:</h5>

@@ -28,29 +28,37 @@ render(){
         <TableHead>
           <TableRow>
             <TableCell>Student Id</TableCell>
+            <TableCell>Allied Id</TableCell>
             <TableCell >Student Name</TableCell>
             <TableCell >Father Name</TableCell>
             <TableCell >Grade</TableCell>
             <TableCell >Contact</TableCell>
+            <TableCell>Total Due</TableCell>
             <TableCell>Transport Fee</TableCell>
             <TableCell>Tuition Fee</TableCell>
+            <TableCell>Amount Paid</TableCell>
+            <TableCell>Amount Due</TableCell>
 
           </TableRow>
         </TableHead>
         {trigger03 && <TableBody>
           {trigger03.map(user => {
-              const {id,name,fatherName,grade,contact,transportFee,tuitionFee} = user;
+              const {id,alliedId,name,fatherName,grade,contact,totalDue,transportFee,tuitionFee,paidAmount,amountDueMonthly} = user;
               return(
                 <TableRow key={id}>
                 <TableCell component="th" scope="row">
                     {id}
                 </TableCell>
+                <TableCell>{alliedId}</TableCell>
                 <TableCell >{name}</TableCell>
                 <TableCell>{fatherName}</TableCell>
                 <TableCell>{grade}</TableCell>
                 <TableCell>{contact}</TableCell>
+                <TableCell>{totalDue}</TableCell>
                 <TableCell>{transportFee}</TableCell>
                 <TableCell>{tuitionFee}</TableCell>
+                <TableCell>{paidAmount}</TableCell>
+                <TableCell>{amountDueMonthly}</TableCell>
                 </TableRow>
               );
             })}
