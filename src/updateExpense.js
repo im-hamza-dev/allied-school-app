@@ -4,6 +4,7 @@ import './tabs'
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import { delay, async } from 'q';
+import baseURL from './instance';
 
 
 const MyButton = styled(Button)({
@@ -56,7 +57,7 @@ class UpadteExpense extends Component{
 
         await axios({
             method: 'put',
-            url: 'https://allied-school-api.herokuapp.com/api/expense/'+ expenseId,
+            url: baseURL+'/api/expense/'+ expenseId,
             data: formBody,
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
 

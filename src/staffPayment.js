@@ -8,6 +8,8 @@ import DataTableStaff from './dataTableStaff';
 import AddStaff from './addStaff';
 import UpdateStaff from './updateStaff';
 import SubmitSalary from './submitSalary';
+import baseURL from './instance';
+
  
 const MyButton = styled(Button)({
     background: 'linear-gradient(45deg, #9343A3 30%, #B34CC7 90%)',
@@ -28,6 +30,7 @@ class StaffPayment extends Component{
         super(props);
         this.state={
             staffId:'',
+            alliedId:'',
             staffName:'',
             position:'',
             contact:'',
@@ -48,7 +51,7 @@ class StaffPayment extends Component{
         };
         console.log("helo friends i'm in");
         const axios = require('axios');
-        axios.get("https://allied-school-api.herokuapp.com/api/staff", config)
+        axios.get(baseURL+"/api/staff", config)
         .then(response =>
             {
                 console.log("i'm in to response")
@@ -77,6 +80,7 @@ class StaffPayment extends Component{
                             return (
                                 {
                                     staffId: `${user.staffId}`,
+                                    alliedId:`${user.alliedId}`,
                                     staffName: `${user.staffName}`,
                                     position: `${user.position}`,
                                     contact: `${user.contact}`,

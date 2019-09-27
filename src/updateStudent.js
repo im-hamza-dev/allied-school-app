@@ -4,6 +4,7 @@ import './tabs'
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import { async } from 'q';
+import baseURL from './instance';
 
 
 const MyButton = styled(Button)({
@@ -26,6 +27,7 @@ class UpdateStudent extends Component{
         super(props);
         this.state={
             studentId:'',
+            alliedId:'',
             studentName:'',
             fatherName:'',
             contact:'',
@@ -41,13 +43,13 @@ class UpdateStudent extends Component{
 
         e.preventDefault();
         console.log("i'm in");
-        const {studentId, studentName, fatherName, grade, contact} = this.state;
-        const formBody = {studentId, studentName, fatherName, grade, contact};
+        const {studentId, alliedId, studentName, fatherName, grade, contact} = this.state;
+        const formBody = {studentId, alliedId, studentName, fatherName, grade, contact};
         const axios = require('axios');
 
         await axios({
             method: 'put',
-            url: 'https://allied-school-api.herokuapp.com/api/student/'+ studentId,
+            url: baseURL+'/api/student/'+ studentId,
             data: formBody,
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
         })
@@ -68,15 +70,21 @@ class UpdateStudent extends Component{
             });
 
             this.props.trigger03();
-            this.setState({studentId:'', studentName:'', fatherName:'', grade:'', contact:''});
+            this.setState({studentId:'', alliedId: '', studentName:'', fatherName:'', grade:'', contact:''});
     }
     
     render(){ 
-        const {studentId, studentName, fatherName, grade, contact} = this.state;
+        const {studentId, alliedId, studentName, fatherName, grade, contact} = this.state;
         return(
             <form onSubmit = {this.onSubmitUpdate}>
                              <h5>Student Id:</h5>
                             <input class = 'input' type = 'number' name = 'studentId' value = {studentId} onChange = {this.onChange}/>
+
+                            <br/>
+                            
+
+                            <h5>Allied Id:</h5>
+                            <input class = 'input' type = 'text' name = 'alliedId' value = {alliedId} onChange = {this.onChange}/>
 
                             <br/>
 

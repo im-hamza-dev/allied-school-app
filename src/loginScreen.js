@@ -6,6 +6,7 @@ import FormDialog from './dialogFormSignUp';
 import { withRouter } from 'react-router-dom';
 import { Dialog } from '@material-ui/core';
 // import { url } from 'inspector';
+import baseURL from './instance';
 
 
 const MyButton = styled(Button)({
@@ -53,7 +54,7 @@ class Login extends Component{
         const axios = require('axios');
         await axios({
             method:'post',
-            url:'https://allied-school-api.herokuapp.com/api/login',
+            url:baseURL+'/api/login',
             data:formBody,
         })
         .then(function(response){
@@ -64,7 +65,8 @@ class Login extends Component{
                 history.push("/main");
             }
             else{
-                alert("Invalid Credentials");
+                // console.log("Res",response)
+                alert("Invalid Credentials")
             }
         })
         .catch(function (response) {

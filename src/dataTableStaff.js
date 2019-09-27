@@ -27,6 +27,7 @@ render(){
         <TableHead>
           <TableRow>
             <TableCell>Staff Id</TableCell>
+            <TableCell>Allied Id</TableCell>
             <TableCell >Staff Name</TableCell>
             <TableCell >Position</TableCell>
             <TableCell >Contact</TableCell>
@@ -35,12 +36,13 @@ render(){
         </TableHead>
         {trigger03Staff && <TableBody>
           {trigger03Staff.map(user => {
-              const {staffId,staffName,position,contact,salary} = user;
+              const {staffId,alliedId,staffName,position,contact,salary} = user;
               return(
                 <TableRow key={staffId}>
                 <TableCell component="th" scope="row">
                     {staffId}
                 </TableCell>
+                <TableCell>{alliedId}</TableCell>
                 <TableCell >{staffName}</TableCell>
                 <TableCell>{position}</TableCell>
                 <TableCell>{contact}</TableCell>

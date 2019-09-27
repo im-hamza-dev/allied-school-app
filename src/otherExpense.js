@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import DataTableExpense from './dataTableExpense';
 import AddExpense from './addExpense';
 import UpdateExpense from './updateExpense';
+import baseURL from './instance';
+
 
 const MyButton = styled(Button)({
     background: 'linear-gradient(45deg, #9343A3 30%, #B34CC7 90%)',
@@ -45,7 +47,7 @@ class OtherExpense extends Component{
             headers: {'Authorization': "bearer " + localStorage.getItem("Token")}
         };
         const axios = require('axios');
-        axios.get("https://allied-school-api.herokuapp.com/api/expense", config)
+        axios.get(baseURL + "/api/expense", config)
         .then(response =>
             {
                 this.setState({totalExpense:0});

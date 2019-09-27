@@ -4,6 +4,8 @@ import './tabs'
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import { delay, async } from 'q';
+import './instance';
+import baseURL from './instance';
 
 
 const MyButton = styled(Button)({
@@ -32,30 +34,23 @@ class AddExpense extends Component{
             year: '',
             }
     }
+    
 
     onChangeAddExpense = (e)=>{
         this.setState({[e.target.name]:e.target.value});
     }
-    // sleep = (milliseconds) => {
-    //     var start = new Date().getTime();
-    //     for (var i = 0; i < 1e7; i++) {
-    //       if ((new Date().getTime() - start) > milliseconds){
-    //         break;
-    //       }
-    //     }
-    //   }
-
+ 
     onSubmitAddExpense = async(e) =>{
 
         e.preventDefault();
-
+        console.log(baseURL);
         const {expenseTitle, comment, amount, month, year} = this.state;
         const formBody = {expenseTitle, amount, comment, month, year};
         const axios = require('axios');
 
         await axios({
             method: 'post',
-            url: 'https://allied-school-api.herokuapp.com/api/expense',
+            url: baseURL+'/api/expense',
             data: formBody,
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
 

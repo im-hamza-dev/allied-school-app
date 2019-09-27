@@ -3,6 +3,8 @@ import './totalIncome.css';
 import './scrollTabs';
 import './yearSelection';
 import { async } from 'q';
+import baseURL from './instance';
+
 
 class TotalIncome extends Component{
     constructor(props){
@@ -25,7 +27,7 @@ class TotalIncome extends Component{
         if(localStorage.getItem("Token"))
         {
         const axios = require('axios');
-        await axios.get("https://allied-school-api.herokuapp.com/api/student/", config)
+        await axios.get(baseURL+"/api/student/", config)
         .then(response =>
             {
                 this.setState({totalIncomingFee:0});
@@ -47,7 +49,7 @@ class TotalIncome extends Component{
                     return ({});
                 })
             })
-        await axios.get("https://allied-school-api.herokuapp.com/api/expense", config)
+        await axios.get(baseURL+"/api/expense", config)
         .then(response =>
             {
                 this.setState({totalExpensePaid:0});
@@ -67,7 +69,7 @@ class TotalIncome extends Component{
                         return({});
                     })
             })
-        await axios.get("https://allied-school-api.herokuapp.com/api/staff", config)
+        await axios.get(baseURL+"/api/staff", config)
         .then(response =>
             {
                 this.setState({totalSalaryPaid:0});

@@ -7,6 +7,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { async } from 'q';
+import baseURL from './instance';
+
 
 class FormDialog extends Component {
   constructor(props){
@@ -27,7 +29,7 @@ class FormDialog extends Component {
     const axios = require('axios');
     await axios({
         method:'post',
-        url:'https://allied-school-api.herokuapp.com/api/forgot-password',
+        url:baseURL+'/api/forgot-password',
         // data:formBody,
     })
     .then(function(response){

@@ -4,6 +4,7 @@ import './tabs'
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import { delay, async } from 'q';
+import baseURL from './instance';
 
 
 const MyButton = styled(Button)({
@@ -47,7 +48,7 @@ class SubmitSalary extends Component{
 
         await axios({
             method: 'post',
-            url: 'https://allied-school-api.herokuapp.com/api/salary',
+            url: baseURL+'/api/salary',
             data: formBody,
             headers: {'Authorization': "Bearer " + localStorage.getItem("Token")}
 
